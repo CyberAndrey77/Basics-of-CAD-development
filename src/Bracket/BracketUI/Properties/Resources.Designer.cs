@@ -63,6 +63,16 @@ namespace BracketUI.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BracketDrawing {
+            get {
+                object obj = ResourceManager.GetObject("BracketDrawing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap HoleHeight {
             get {
                 object obj = ResourceManager.GetObject("HoleHeight", resourceCulture);
@@ -71,20 +81,11 @@ namespace BracketUI.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
-        /// </summary>
-        internal static string MountingHoleDiameter {
-            get {
-                return ResourceManager.GetString("MountingHoleDiameter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap MountingHoleDiameter1 {
+        internal static System.Drawing.Bitmap MountingHoleDiameter {
             get {
-                object obj = ResourceManager.GetObject("MountingHoleDiameter1", resourceCulture);
+                object obj = ResourceManager.GetObject("MountingHoleDiameter", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

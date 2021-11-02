@@ -8,86 +8,68 @@ namespace Bracket
 {
     public class BracketParameters
     {
-        private List<Parameter> _parameters = new List<Parameter>();
+        private List<Parameter> _parameters = new List<Parameter>()
+        {
+            { new Parameter(80, 70, 100, ParameterName.PlateWidth, "Plate Width") },
+            { new Parameter(120, 100, 130, ParameterName.PlateLength, "Plate Length") },
+            { new Parameter(60, 50, 70, ParameterName.OuterTubeDiameter, "Outer Tube Diameter") },
+            { new Parameter(10, 5, 12, ParameterName.MountingHoleDiameter, "Mounting Hole Diameter") },
+            { new Parameter(10, 7, 15, ParameterName.HoleHeight, "Hole Height") },
+            { new Parameter(25, 20, 30, ParameterName.SideWallHeight, "Side Wall Height") }
+        };
 
         public double this[ParameterName name]
         {
             get => _parameters.Find(x => x.Name.Equals(name)).Value;
-            set => _parameters.Find(x => x.Name.Equals(name)).Value = value;
+            set 
+            {
+                switch (name)
+                {
+                    case ParameterName.OuterTubeDiameter:
+                        {
+                            //6  это толщина двух стенок
+                            _parameters.Find(x => x.Name.Equals(name)).Max = 
+                                _parameters.Find(x => x.Name.Equals(ParameterName.PlateWidth)).Value - 6;
+                        }
+                        break;
+
+                    case ParameterName.PlateWidth:
+                        {
+                            //6  это толщина двух стенок
+                            _parameters.Find(x => x.Name.Equals(name)).Min = 
+                                _parameters.Find(x => x.Name.Equals(ParameterName.OuterTubeDiameter)).Value + 6;
+                        }
+                        break;
+
+                    case ParameterName.SideWallHeight:
+                        {
+                            //5 это расстояние от границы отверстия до конца стенки сверху
+                            _parameters.Find(x => x.Name.Equals(name)).Min = 
+                                _parameters.Find(x => x.Name.Equals(ParameterName.MountingHoleDiameter)).Value + 
+                                _parameters.Find(x => x.Name.Equals(ParameterName.HoleHeight)).Value + 5;
+                        }
+                        break;
+
+                    case ParameterName.HoleHeight:
+                        {
+                            //5 это расстояние от границы отверстия до конца стенки сверху
+                            _parameters.Find(x => x.Name.Equals(name)).Max = 
+                                _parameters.Find(x => x.Name.Equals(ParameterName.SideWallHeight)).Value - 
+                                _parameters.Find(x => x.Name.Equals(ParameterName.MountingHoleDiameter)).Value - 5;
+                        }
+                        break;
+
+                    case ParameterName.MountingHoleDiameter:
+                        {
+                            //5 это расстояние от границы отверстия до конца стенки сверху
+                            _parameters.Find(x => x.Name.Equals(name)).Max = 
+                                _parameters.Find(x => x.Name.Equals(ParameterName.SideWallHeight)).Value - 
+                                _parameters.Find(x => x.Name.Equals(ParameterName.HoleHeight)).Value - 5;
+                        }
+                        break;
+                }
+                _parameters.Find(x => x.Name.Equals(name)).Value = value;
+            }
         }
-
-        //private double _plateWidth = 0;
-        //private double _plateLength = 0;
-        //private double _outerTubeDiameter = 0;
-        //private double _mountingHoleDiameter = 0;
-        //private double _holeHeight = 0;
-        //private double _sideWallHeight = 0;
-
-        //public double PlateWidth
-        //{
-        //    get
-        //    {
-        //        return _plateWidth;
-        //    }
-        //    set
-        //    {
-
-        //    }
-        //}
-        //public double PlateLength
-        //{
-        //    get
-        //    {
-        //        return _plateLength;
-        //    }
-        //    set
-        //    {
-
-        //    }
-        //}
-        //public double OuterTubeDiameter
-        //{
-        //    get
-        //    {
-        //        return _outerTubeDiameter;
-        //    }
-        //    set
-        //    {
-
-        //    }
-        //}
-        //public double MountingHoleDiameter
-        //{
-        //    get
-        //    {
-        //        return _mountingHoleDiameter;
-        //    }
-        //    set
-        //    {
-
-        //    }
-        //}
-        //public double HoleHeight
-        //{
-        //    get
-        //    {
-        //        return _holeHeight;
-        //    }
-        //    set
-        //    {
-
-        //    }
-        //}
-        //public double SideWallHeight
-        //{
-        //    get
-        //    {
-        //        return _sideWallHeight;
-        //    }
-        //    set
-        //    {
-
-        //    }
-        //}
     }
 }

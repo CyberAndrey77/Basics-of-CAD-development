@@ -12,5 +12,15 @@ namespace Bracket
     class BracketBuilder
     {
         //KompasObject kompasObject = (KompasObject)Marshal.GetActiveObject("KOMPAS.Application.5");
+        // KompasObject kompasObject = (KompasObject)Marshal.GetActiveObject("KOMPAS.Application.5");
+        //Type t = Type.GetTypeFromProgID("KOMPAS.Application.5");
+        //KompasObject kompas = (KompasObject)Activator.CreateInstance(t);
+        //if (kompas != null)
+        //{
+        //    kompas.Visible = true;
+        //    kompas.ActivateControllerAPI();
+        //    ksDocument3D iDocument3D = (ksDocument3D)kompas.Document3D();
+        //    iDocument3D.Create(false /*видимый*/, true /*деталь*/);
+        //}
     }
 }
