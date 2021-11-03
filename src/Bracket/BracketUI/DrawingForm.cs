@@ -17,5 +17,10 @@ namespace BracketUI
             InitializeComponent();
             pictureBox1.Image = Properties.Resources.BracketDrawing;
         }
+
+        private void DrawingForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
     }
 }

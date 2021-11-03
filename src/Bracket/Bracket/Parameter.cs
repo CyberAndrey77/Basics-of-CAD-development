@@ -18,7 +18,7 @@ namespace Bracket
             {
                 if (value < Min || value > Max)
                 {
-                    throw new ArgumentException($"{ParameterName} must be greater than {Min} and not {Max}, it was {value}");
+                    throw new ArgumentException($"{ParameterName} must be greater than {Min} mm and not greater than {Max} mm, it was {value} mm");
                 }
                 _value = value;
             }

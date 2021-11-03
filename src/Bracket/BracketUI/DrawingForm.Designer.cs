@@ -53,6 +53,7 @@ namespace BracketUI
             this.Controls.Add(this.pictureBox1);
             this.Name = "DrawingForm";
             this.Text = "DrawingForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DrawingForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

@@ -45,12 +45,18 @@ namespace BracketUI
             this.buildButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openDrawingButton = new System.Windows.Forms.Button();
+            this.minMaxPlateWidthLabel = new System.Windows.Forms.Label();
+            this.minMaxPlateLengthLabel = new System.Windows.Forms.Label();
+            this.minMaxOuterTubeDiameterLabel = new System.Windows.Forms.Label();
+            this.minMaxMountingHoleDiameterLabel = new System.Windows.Forms.Label();
+            this.minMaxHoleHeightLabel = new System.Windows.Forms.Label();
+            this.minMaxSideWallHeightLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // plateWidthTextBox
             // 
-            this.plateWidthTextBox.Location = new System.Drawing.Point(216, 12);
+            this.plateWidthTextBox.Location = new System.Drawing.Point(208, 12);
             this.plateWidthTextBox.Name = "plateWidthTextBox";
             this.plateWidthTextBox.Size = new System.Drawing.Size(100, 22);
             this.plateWidthTextBox.TabIndex = 0;
@@ -62,22 +68,22 @@ namespace BracketUI
             this.plateWidthLabel.AutoSize = true;
             this.plateWidthLabel.Location = new System.Drawing.Point(12, 15);
             this.plateWidthLabel.Name = "plateWidthLabel";
-            this.plateWidthLabel.Size = new System.Drawing.Size(80, 17);
+            this.plateWidthLabel.Size = new System.Drawing.Size(103, 17);
             this.plateWidthLabel.TabIndex = 1;
-            this.plateWidthLabel.Text = "Plate Width";
+            this.plateWidthLabel.Text = "Plate Width (A)";
             // 
             // plateLengthLabel
             // 
             this.plateLengthLabel.AutoSize = true;
             this.plateLengthLabel.Location = new System.Drawing.Point(10, 65);
             this.plateLengthLabel.Name = "plateLengthLabel";
-            this.plateLengthLabel.Size = new System.Drawing.Size(88, 17);
+            this.plateLengthLabel.Size = new System.Drawing.Size(111, 17);
             this.plateLengthLabel.TabIndex = 2;
-            this.plateLengthLabel.Text = "Plate Length";
+            this.plateLengthLabel.Text = "Plate Length (B)";
             // 
             // plateLengthTextBox
             // 
-            this.plateLengthTextBox.Location = new System.Drawing.Point(216, 62);
+            this.plateLengthTextBox.Location = new System.Drawing.Point(208, 62);
             this.plateLengthTextBox.Name = "plateLengthTextBox";
             this.plateLengthTextBox.Size = new System.Drawing.Size(100, 22);
             this.plateLengthTextBox.TabIndex = 3;
@@ -86,7 +92,7 @@ namespace BracketUI
             // 
             // outerTubeDiameterTextBox
             // 
-            this.outerTubeDiameterTextBox.Location = new System.Drawing.Point(216, 112);
+            this.outerTubeDiameterTextBox.Location = new System.Drawing.Point(208, 112);
             this.outerTubeDiameterTextBox.Name = "outerTubeDiameterTextBox";
             this.outerTubeDiameterTextBox.Size = new System.Drawing.Size(100, 22);
             this.outerTubeDiameterTextBox.TabIndex = 4;
@@ -98,22 +104,22 @@ namespace BracketUI
             this.outerTubeDiameterLabel.AutoSize = true;
             this.outerTubeDiameterLabel.Location = new System.Drawing.Point(10, 115);
             this.outerTubeDiameterLabel.Name = "outerTubeDiameterLabel";
-            this.outerTubeDiameterLabel.Size = new System.Drawing.Size(142, 17);
+            this.outerTubeDiameterLabel.Size = new System.Drawing.Size(165, 17);
             this.outerTubeDiameterLabel.TabIndex = 5;
-            this.outerTubeDiameterLabel.Text = "Outer Tube Diameter";
+            this.outerTubeDiameterLabel.Text = "Outer Tube Diameter (C)";
             // 
             // mountingHoleDiameterLabel
             // 
             this.mountingHoleDiameterLabel.AutoSize = true;
             this.mountingHoleDiameterLabel.Location = new System.Drawing.Point(10, 165);
             this.mountingHoleDiameterLabel.Name = "mountingHoleDiameterLabel";
-            this.mountingHoleDiameterLabel.Size = new System.Drawing.Size(160, 17);
+            this.mountingHoleDiameterLabel.Size = new System.Drawing.Size(183, 17);
             this.mountingHoleDiameterLabel.TabIndex = 6;
-            this.mountingHoleDiameterLabel.Text = "Mounting Hole Diameter";
+            this.mountingHoleDiameterLabel.Text = "Mounting Hole Diameter (E)";
             // 
             // mountingHoleDiameterTextBox
             // 
-            this.mountingHoleDiameterTextBox.Location = new System.Drawing.Point(216, 162);
+            this.mountingHoleDiameterTextBox.Location = new System.Drawing.Point(208, 162);
             this.mountingHoleDiameterTextBox.Name = "mountingHoleDiameterTextBox";
             this.mountingHoleDiameterTextBox.Size = new System.Drawing.Size(100, 22);
             this.mountingHoleDiameterTextBox.TabIndex = 7;
@@ -122,7 +128,7 @@ namespace BracketUI
             // 
             // holeHeightTextBox
             // 
-            this.holeHeightTextBox.Location = new System.Drawing.Point(216, 212);
+            this.holeHeightTextBox.Location = new System.Drawing.Point(208, 212);
             this.holeHeightTextBox.Name = "holeHeightTextBox";
             this.holeHeightTextBox.Size = new System.Drawing.Size(100, 22);
             this.holeHeightTextBox.TabIndex = 9;
@@ -134,13 +140,13 @@ namespace BracketUI
             this.holeHeightLabel.AutoSize = true;
             this.holeHeightLabel.Location = new System.Drawing.Point(12, 215);
             this.holeHeightLabel.Name = "holeHeightLabel";
-            this.holeHeightLabel.Size = new System.Drawing.Size(82, 17);
+            this.holeHeightLabel.Size = new System.Drawing.Size(106, 17);
             this.holeHeightLabel.TabIndex = 8;
-            this.holeHeightLabel.Text = "Hole Height";
+            this.holeHeightLabel.Text = "Hole Height (D)";
             // 
             // sideWallHeightTextBox
             // 
-            this.sideWallHeightTextBox.Location = new System.Drawing.Point(216, 262);
+            this.sideWallHeightTextBox.Location = new System.Drawing.Point(208, 262);
             this.sideWallHeightTextBox.Name = "sideWallHeightTextBox";
             this.sideWallHeightTextBox.Size = new System.Drawing.Size(100, 22);
             this.sideWallHeightTextBox.TabIndex = 11;
@@ -152,25 +158,27 @@ namespace BracketUI
             this.sideWallHeightLabel.AutoSize = true;
             this.sideWallHeightLabel.Location = new System.Drawing.Point(12, 265);
             this.sideWallHeightLabel.Name = "sideWallHeightLabel";
-            this.sideWallHeightLabel.Size = new System.Drawing.Size(112, 17);
+            this.sideWallHeightLabel.Size = new System.Drawing.Size(134, 17);
             this.sideWallHeightLabel.TabIndex = 10;
-            this.sideWallHeightLabel.Text = "Side Wall Height";
+            this.sideWallHeightLabel.Text = "Side Wall Height (F)";
             // 
             // buildButton
             // 
             this.buildButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buildButton.Location = new System.Drawing.Point(540, 251);
+            this.buildButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buildButton.Location = new System.Drawing.Point(669, 251);
             this.buildButton.Name = "buildButton";
             this.buildButton.Size = new System.Drawing.Size(114, 35);
             this.buildButton.TabIndex = 12;
             this.buildButton.Text = "Build";
             this.buildButton.UseVisualStyleBackColor = true;
+            this.buildButton.Click += new System.EventHandler(this.buildButton_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(365, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(494, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(289, 222);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -180,7 +188,8 @@ namespace BracketUI
             // openDrawingButton
             // 
             this.openDrawingButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.openDrawingButton.Location = new System.Drawing.Point(365, 251);
+            this.openDrawingButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.openDrawingButton.Location = new System.Drawing.Point(494, 251);
             this.openDrawingButton.Name = "openDrawingButton";
             this.openDrawingButton.Size = new System.Drawing.Size(114, 35);
             this.openDrawingButton.TabIndex = 14;
@@ -188,11 +197,71 @@ namespace BracketUI
             this.openDrawingButton.UseVisualStyleBackColor = true;
             this.openDrawingButton.Click += new System.EventHandler(this.openDrawingButton_Click);
             // 
+            // minMaxPlateWidthLabel
+            // 
+            this.minMaxPlateWidthLabel.AutoSize = true;
+            this.minMaxPlateWidthLabel.Location = new System.Drawing.Point(325, 15);
+            this.minMaxPlateWidthLabel.Name = "minMaxPlateWidthLabel";
+            this.minMaxPlateWidthLabel.Size = new System.Drawing.Size(46, 17);
+            this.minMaxPlateWidthLabel.TabIndex = 15;
+            this.minMaxPlateWidthLabel.Text = "label1";
+            // 
+            // minMaxPlateLengthLabel
+            // 
+            this.minMaxPlateLengthLabel.AutoSize = true;
+            this.minMaxPlateLengthLabel.Location = new System.Drawing.Point(325, 65);
+            this.minMaxPlateLengthLabel.Name = "minMaxPlateLengthLabel";
+            this.minMaxPlateLengthLabel.Size = new System.Drawing.Size(46, 17);
+            this.minMaxPlateLengthLabel.TabIndex = 16;
+            this.minMaxPlateLengthLabel.Text = "label1";
+            // 
+            // minMaxOuterTubeDiameterLabel
+            // 
+            this.minMaxOuterTubeDiameterLabel.AutoSize = true;
+            this.minMaxOuterTubeDiameterLabel.Location = new System.Drawing.Point(325, 115);
+            this.minMaxOuterTubeDiameterLabel.Name = "minMaxOuterTubeDiameterLabel";
+            this.minMaxOuterTubeDiameterLabel.Size = new System.Drawing.Size(46, 17);
+            this.minMaxOuterTubeDiameterLabel.TabIndex = 17;
+            this.minMaxOuterTubeDiameterLabel.Text = "label1";
+            // 
+            // minMaxMountingHoleDiameterLabel
+            // 
+            this.minMaxMountingHoleDiameterLabel.AutoSize = true;
+            this.minMaxMountingHoleDiameterLabel.Location = new System.Drawing.Point(325, 165);
+            this.minMaxMountingHoleDiameterLabel.Name = "minMaxMountingHoleDiameterLabel";
+            this.minMaxMountingHoleDiameterLabel.Size = new System.Drawing.Size(46, 17);
+            this.minMaxMountingHoleDiameterLabel.TabIndex = 18;
+            this.minMaxMountingHoleDiameterLabel.Text = "label1";
+            // 
+            // minMaxHoleHeightLabel
+            // 
+            this.minMaxHoleHeightLabel.AutoSize = true;
+            this.minMaxHoleHeightLabel.Location = new System.Drawing.Point(325, 215);
+            this.minMaxHoleHeightLabel.Name = "minMaxHoleHeightLabel";
+            this.minMaxHoleHeightLabel.Size = new System.Drawing.Size(46, 17);
+            this.minMaxHoleHeightLabel.TabIndex = 19;
+            this.minMaxHoleHeightLabel.Text = "label1";
+            // 
+            // minMaxSideWallHeightLabel
+            // 
+            this.minMaxSideWallHeightLabel.AutoSize = true;
+            this.minMaxSideWallHeightLabel.Location = new System.Drawing.Point(325, 265);
+            this.minMaxSideWallHeightLabel.Name = "minMaxSideWallHeightLabel";
+            this.minMaxSideWallHeightLabel.Size = new System.Drawing.Size(46, 17);
+            this.minMaxSideWallHeightLabel.TabIndex = 20;
+            this.minMaxSideWallHeightLabel.Text = "label1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(666, 298);
+            this.ClientSize = new System.Drawing.Size(795, 298);
+            this.Controls.Add(this.minMaxSideWallHeightLabel);
+            this.Controls.Add(this.minMaxHoleHeightLabel);
+            this.Controls.Add(this.minMaxMountingHoleDiameterLabel);
+            this.Controls.Add(this.minMaxOuterTubeDiameterLabel);
+            this.Controls.Add(this.minMaxPlateLengthLabel);
+            this.Controls.Add(this.minMaxPlateWidthLabel);
             this.Controls.Add(this.openDrawingButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.buildButton);
@@ -209,8 +278,8 @@ namespace BracketUI
             this.Controls.Add(this.plateWidthLabel);
             this.Controls.Add(this.plateWidthTextBox);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(684, 345);
-            this.MinimumSize = new System.Drawing.Size(684, 345);
+            this.MaximumSize = new System.Drawing.Size(813, 345);
+            this.MinimumSize = new System.Drawing.Size(813, 345);
             this.Name = "MainForm";
             this.Text = "MainFrom";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -236,6 +305,12 @@ namespace BracketUI
         private System.Windows.Forms.Button buildButton;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button openDrawingButton;
+        private System.Windows.Forms.Label minMaxPlateWidthLabel;
+        private System.Windows.Forms.Label minMaxPlateLengthLabel;
+        private System.Windows.Forms.Label minMaxOuterTubeDiameterLabel;
+        private System.Windows.Forms.Label minMaxMountingHoleDiameterLabel;
+        private System.Windows.Forms.Label minMaxHoleHeightLabel;
+        private System.Windows.Forms.Label minMaxSideWallHeightLabel;
     }
 }
 
