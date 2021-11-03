@@ -167,7 +167,7 @@ namespace BracketUI
             this.buildButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buildButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buildButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buildButton.Location = new System.Drawing.Point(706, 307);
+            this.buildButton.Location = new System.Drawing.Point(706, 252);
             this.buildButton.Name = "buildButton";
             this.buildButton.Size = new System.Drawing.Size(114, 35);
             this.buildButton.TabIndex = 12;
@@ -190,7 +190,7 @@ namespace BracketUI
             // 
             this.openDrawingButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.openDrawingButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.openDrawingButton.Location = new System.Drawing.Point(706, 254);
+            this.openDrawingButton.Location = new System.Drawing.Point(497, 252);
             this.openDrawingButton.Name = "openDrawingButton";
             this.openDrawingButton.Size = new System.Drawing.Size(114, 35);
             this.openDrawingButton.TabIndex = 14;
@@ -256,7 +256,7 @@ namespace BracketUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 354);
+            this.ClientSize = new System.Drawing.Size(832, 299);
             this.Controls.Add(this.openDrawingButton);
             this.Controls.Add(this.plateWidthLabel);
             this.Controls.Add(this.pictureBox1);
@@ -279,6 +279,8 @@ namespace BracketUI
             this.Controls.Add(this.outerTubeDiameterLabel);
             this.Controls.Add(this.minMaxPlateLengthLabel);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(850, 346);
+            this.MinimumSize = new System.Drawing.Size(850, 346);
             this.Name = "MainForm";
             this.Text = "MainFrom";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
