@@ -11,7 +11,6 @@ namespace BracketUI
     {
         private BracketParameters _parameters;
         private Dictionary<object, ParameterName> _textBoxs;
-        private bool _isError;
         public MainForm()
         {
             InitializeComponent();
@@ -31,15 +30,15 @@ namespace BracketUI
             {
                 if (textBox is TextBox)
                 {
-                    textBox.Text = _parameters[_textBoxs[textBox]].ToString();
+                    textBox.Text = _parameters[_textBoxs[textBox]].Value.ToString();
                 }
             }
+
             foreach (var name in Enum.GetValues(typeof(ParameterName)).Cast<ParameterName>())
             {
                 ChangeLabel(name);
             }
             
-
             pictureBox1.Image = Properties.Resources.PlateWidth;
         }
 
@@ -89,14 +88,12 @@ namespace BracketUI
                     }
                     break;
             }
-            control.Text = $"from {_parameters[parameterName, "min"]} mm " +
-                $"to {_parameters[parameterName, "max"]} mm";
+            control.Text = $"from {_parameters[parameterName].Min} mm " +
+                $"to {_parameters[parameterName].Max} mm";
         }
 
         private void ShowError(object sender, string message)
         {
-            //((TextBox)sender).BackColor = System.Drawing.Color.FromArgb(240, 128, 128);
-            //_isError = true;
             MessageBox.Show(message + "!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             ((TextBox)sender).Focus();
         }
@@ -106,7 +103,10 @@ namespace BracketUI
             try
             {
                 ((TextBox)sender).Text = ((TextBox)sender).Text.Replace('.', ',');
-                _parameters[_textBoxs[sender]] = double.Parse(((TextBox)sender).Text);
+                _parameters[_textBoxs[sender]] = new Parameter(double.Parse(((TextBox)sender).Text), 
+                    _parameters[_textBoxs[sender]].Min, _parameters[_textBoxs[sender]].Max, 
+                    _parameters[_textBoxs[sender]].Name, _parameters[_textBoxs[sender]].ParameterName);
+                //_parameters[_textBoxs[sender]].Value = double.Parse(((TextBox)sender).Text);
                 switch(_textBoxs[sender])
                 {
                     case ParameterName.PlateWidth:
@@ -139,12 +139,6 @@ namespace BracketUI
                         }
                         break;
                 }
-
-                //if (_isError)
-                //{
-                //    ((TextBox)sender).BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
-                //    _isError = false;
-                //}
             }
             catch (FormatException)
             {
@@ -223,6 +217,8 @@ namespace BracketUI
                     textBox_Leave(textBox, e);
                 }
             }
+
+
         }
     }
 }
