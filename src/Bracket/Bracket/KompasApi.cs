@@ -65,57 +65,6 @@ namespace Bracket
             _document3D.Create(false, true);
             _document2D = (ksDocument2D)Kompas.Document2D();
             _part = (ksPart)_document3D.GetPart((int)Part_Type.pTop_Part); // новый компонент
-           // var currentPlan = (ksEntity)_part.GetDefaultEntity((short)Obj3dType.o3d_planeXOY); // 1-интерфейс на плоскость XOY
-
-            ////создаем эскиз для прямоугольника
-            //var sketch = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_sketch);
-
-            //ksSketchDefinition sketchDefinition = (ksSketchDefinition)sketch.GetDefinition();
-
-            ////выбираем плоскость
-            //sketchDefinition.SetPlane(currentPlan);
-            //sketch.Create();
-
-            //_document2D = (ksDocument2D)sketchDefinition.BeginEdit();
-
-            //_document2D.ksLineSeg(-40.0, -25.0, 40.0, -25.0, 1);
-            //_document2D.ksLineSeg(40.0, -25.0, 40.0, 25.0, 1);
-            //_document2D.ksLineSeg(40.0, 25.0, -40.0, 25.0, 1);
-            //_document2D.ksLineSeg(-40.0, 25.0, -40.0, -25.0, 1);
-
-            //sketchDefinition.EndEdit();
-
-            ////выдавливание
-            //var entityExtrude = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
-
-            //ksBossExtrusionDefinition ksBossExtrusion = (ksBossExtrusionDefinition)entityExtrude.GetDefinition();
-
-            //// интерфейс структуры параметров выдавливания
-            //ksExtrusionParam extrudeParameters = (ksExtrusionParam)ksBossExtrusion.ExtrusionParam();
-            //// интерфейс структуры параметров тонкой стенки
-            //ksThinParam thinParam = (ksThinParam)ksBossExtrusion.ThinParam();
-
-            //// эскиз операции выдавливания
-            //ksBossExtrusion.SetSketch(sketch);
-
-            //// направление выдавливания (прямое)
-            //extrudeParameters.direction = (short)Direction_Type.dtNormal;
-
-            //// тип выдавливания (строго на глубину)
-            //extrudeParameters.typeNormal = (short)End_Type.etBlind;
-
-            //// глубина выдавливания
-            //extrudeParameters.depthNormal = -3;
-            //// тонкая стенка в два направления
-            //thinParam.thin = true;
-            ////Толщина стенки в прямом направлении и обратном направлении
-            //thinParam.normalThickness = 10;
-            //thinParam.reverseThickness = 10;
-
-            ////Направление формирования тонкой стенки
-            //thinParam.thinType = (short)Direction_Type.dtBoth;
-
-            //entityExtrude.Create(); // создадим операцию
         }
 
         public void CreateRegtangle(double x1, double y1, double x2, double y2)
@@ -153,10 +102,16 @@ namespace Bracket
             entityExtrude.Create();
         }
 
+        /// <summary>
+        /// Создание эскиза окружности.
+        /// </summary>
+        /// <param name="xCenter">задает центр окружности по X</param>
+        /// <param name="yCenter">задает центр окружности по Y</param>
+        /// <param name="radius">задает радиус окружности</param>
+        /// <param name="plane">задает плоскость для эскиза</param>
         public void CreateCircle(double xCenter, double yCenter, double radius, int plane)
         {
             _currentPlan = (ksEntity)_part.GetDefaultEntity((short)(Obj3dType)plane);
-            //_currentPlan = (ksEntity)_part.GetDefaultEntity((short)Obj3dType.o3d_planeXOY);
             _sketch = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_sketch);
             _sketchDefinition = (ksSketchDefinition)_sketch.GetDefinition();
             _sketchDefinition.SetPlane(_currentPlan);
