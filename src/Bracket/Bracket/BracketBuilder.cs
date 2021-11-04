@@ -7,31 +7,63 @@ using System.Runtime.InteropServices;
 
 namespace Bracket
 {
-    class BracketBuilder
+    public class BracketBuilder
     {
         private KompasApi _kompasApi;
 
-        public void CreateModel(BracketParameters _parameters)
+        public void CreateModel(BracketParameters parameters)
         {
             _kompasApi = new KompasApi();
-            CreatePlate(_parameters);
-            CreateTube(_parameters);
-            CreateWall(_parameters);
-        }
 
-        private void CreatePlate(BracketParameters _parameters)
-        {
+            var x1 = -parameters[ParameterName.PlateLength].Value / 2;
+            var x2 = parameters[ParameterName.PlateLength].Value / 2;
+            var y1 = -parameters[ParameterName.PlateWidth].Value / 2;
+            var y2 = parameters[ParameterName.PlateWidth].Value / 2;
 
-        }
+            CreatePlate(parameters);
+            CreateTube(parameters[ParameterName.OuterTubeDiameter].Value / 2);
 
-        private void CreateTube(BracketParameters _parameters)
-        {
+            CreateWalls(parameters);
 
         }
 
-        private void CreateWall(BracketParameters _parameters)
+        private void CreatePlate(BracketParameters parameters)
         {
+            var x1 = -parameters[ParameterName.PlateLength].Value / 2;
+            var x2 = parameters[ParameterName.PlateLength].Value / 2;
+            var y1 = -parameters[ParameterName.PlateWidth].Value / 2;
+            var y2 = parameters[ParameterName.PlateWidth].Value / 2;
 
+            _kompasApi.CreateRegtangle(x1, y1, x2, y2);
+            _kompasApi.ExtrudeRegtangle(-3);
+        }
+
+        private void CreateTube(double radius)
+        {
+            _kompasApi.CreateCircle(0, 0, radius, 1);
+            _kompasApi.ExtrudeCircle(81, true, 5);
+        }
+
+        private void CreateWalls(BracketParameters parameters)
+        {
+            var x1 = -parameters[ParameterName.PlateLength].Value / 2;
+            var x2 = parameters[ParameterName.PlateLength].Value / 2;
+            var y1 = -parameters[ParameterName.PlateWidth].Value / 2;
+            var y2 = y1 + 3;
+
+            //строим первую стенку
+            _kompasApi.CreateRegtangle(x1, y1, x2, y2);
+            _kompasApi.ExtrudeRegtangle(parameters[ParameterName.SideWallHeight].Value - 3);
+
+            y2 = parameters[ParameterName.PlateWidth].Value / 2;
+            y1 = y2 - 3;
+            //строим вторую стенку
+            _kompasApi.CreateRegtangle(x1, y1, x2, y2);
+            _kompasApi.ExtrudeRegtangle(parameters[ParameterName.SideWallHeight].Value - 3);
+
+
+            _kompasApi.CreateCircle(x2 - (parameters[ParameterName.MountingHoleDiameter].Value / 2 + 5), -parameters[ParameterName.HoleHeight].Value + 3, parameters[ParameterName.MountingHoleDiameter].Value / 2, 2);
+            _kompasApi.CutExtrudeCircle();
         }
     }
 }

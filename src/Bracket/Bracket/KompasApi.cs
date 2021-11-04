@@ -5,24 +5,20 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Kompas6API5;
+using Kompas6Constants3D;
 using KompasAPI7;
 
 namespace Bracket
 {
     class KompasApi
     {
-        public KompasObject Kompas { get; set; }
-        //KompasObject kompasObject = (KompasObject)Marshal.GetActiveObject("KOMPAS.Application.5");
-        // KompasObject kompasObject = (KompasObject)Marshal.GetActiveObject("KOMPAS.Application.5");
-        //Type t = Type.GetTypeFromProgID("KOMPAS.Application.5");
-        //KompasObject kompas = (KompasObject)Activator.CreateInstance(t);
-        //if (kompas != null)
-        //{
-        //    kompas.Visible = true;
-        //    kompas.ActivateControllerAPI();
-        //    ksDocument3D iDocument3D = (ksDocument3D)kompas.Document3D();
-        //    iDocument3D.Create(false /*видимый*/, true /*деталь*/);
-        //}
+        private ksDocument3D _document3D;
+        private ksDocument2D _document2D;
+        private ksPart _part;
+        private ksEntity _sketch;
+        private ksSketchDefinition _sketchDefinition;
+        private ksEntity _currentPlan;
+        public KompasObject Kompas { get; }
         private KompasObject OpenKompas()
         {
             if (!GetActiveKompass(out var kompas))
@@ -59,33 +55,172 @@ namespace Bracket
             }
             catch (COMException)
             {
-                throw new COMException("Failed to open Kompas!");
+                throw new COMException("Failed to open Kompas");
             }
         }
 
-        public void CreateRegtangle()
+        private void CreateDocument()
         {
+            _document3D = (ksDocument3D)Kompas.Document3D();
+            _document3D.Create(false, true);
+            _document2D = (ksDocument2D)Kompas.Document2D();
+            _part = (ksPart)_document3D.GetPart((int)Part_Type.pTop_Part); // новый компонент
+           // var currentPlan = (ksEntity)_part.GetDefaultEntity((short)Obj3dType.o3d_planeXOY); // 1-интерфейс на плоскость XOY
 
+            ////создаем эскиз для прямоугольника
+            //var sketch = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_sketch);
+
+            //ksSketchDefinition sketchDefinition = (ksSketchDefinition)sketch.GetDefinition();
+
+            ////выбираем плоскость
+            //sketchDefinition.SetPlane(currentPlan);
+            //sketch.Create();
+
+            //_document2D = (ksDocument2D)sketchDefinition.BeginEdit();
+
+            //_document2D.ksLineSeg(-40.0, -25.0, 40.0, -25.0, 1);
+            //_document2D.ksLineSeg(40.0, -25.0, 40.0, 25.0, 1);
+            //_document2D.ksLineSeg(40.0, 25.0, -40.0, 25.0, 1);
+            //_document2D.ksLineSeg(-40.0, 25.0, -40.0, -25.0, 1);
+
+            //sketchDefinition.EndEdit();
+
+            ////выдавливание
+            //var entityExtrude = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
+
+            //ksBossExtrusionDefinition ksBossExtrusion = (ksBossExtrusionDefinition)entityExtrude.GetDefinition();
+
+            //// интерфейс структуры параметров выдавливания
+            //ksExtrusionParam extrudeParameters = (ksExtrusionParam)ksBossExtrusion.ExtrusionParam();
+            //// интерфейс структуры параметров тонкой стенки
+            //ksThinParam thinParam = (ksThinParam)ksBossExtrusion.ThinParam();
+
+            //// эскиз операции выдавливания
+            //ksBossExtrusion.SetSketch(sketch);
+
+            //// направление выдавливания (прямое)
+            //extrudeParameters.direction = (short)Direction_Type.dtNormal;
+
+            //// тип выдавливания (строго на глубину)
+            //extrudeParameters.typeNormal = (short)End_Type.etBlind;
+
+            //// глубина выдавливания
+            //extrudeParameters.depthNormal = -3;
+            //// тонкая стенка в два направления
+            //thinParam.thin = true;
+            ////Толщина стенки в прямом направлении и обратном направлении
+            //thinParam.normalThickness = 10;
+            //thinParam.reverseThickness = 10;
+
+            ////Направление формирования тонкой стенки
+            //thinParam.thinType = (short)Direction_Type.dtBoth;
+
+            //entityExtrude.Create(); // создадим операцию
         }
 
-        public void ExtrudeRegtangle()
+        public void CreateRegtangle(double x1, double y1, double x2, double y2)
         {
+            _currentPlan = (ksEntity)_part.GetDefaultEntity((short)Obj3dType.o3d_planeXOY); // 1-интерфейс на плоскость XOY
+            _sketch = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_sketch);
+            _sketchDefinition = (ksSketchDefinition)_sketch.GetDefinition();
+            _sketchDefinition.SetPlane(_currentPlan);
+            _sketch.Create();
 
+            _document2D = (ksDocument2D)_sketchDefinition.BeginEdit();
+
+            _document2D.ksLineSeg(x1, y1, x2, y1, 1);
+            _document2D.ksLineSeg(x1, y1, x1, y2, 1);
+            _document2D.ksLineSeg(x1, y2, x2, y2, 1);
+            _document2D.ksLineSeg(x2, y2, x2, y1, 1);
+
+            _sketchDefinition.EndEdit();
         }
 
-        public void CreateCircle()
+        public void ExtrudeRegtangle(double depth)
         {
+            var entityExtrude = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
+            // интерфейс базовой операции выдавливания
+            var entityExtrudeDefinition = (ksBossExtrusionDefinition)entityExtrude.GetDefinition();
+            // интерфейс структуры параметров выдавливания
+            ksExtrusionParam extrudeParameters = (ksExtrusionParam)entityExtrudeDefinition.ExtrusionParam();
+            extrudeParameters.direction = (short)Direction_Type.dtNormal;
 
+            entityExtrudeDefinition.SetSketch(_sketch);
+            // тип выдавливания (строго на глубину)
+            extrudeParameters.typeNormal = (short)End_Type.etBlind;
+            // глубина выдавливания
+            extrudeParameters.depthNormal = depth;
+            entityExtrude.Create();
         }
 
-        public void ExtrudeCircle()
+        public void CreateCircle(double xCenter, double yCenter, double radius, int plane)
         {
+            _currentPlan = (ksEntity)_part.GetDefaultEntity((short)(Obj3dType)plane);
+            //_currentPlan = (ksEntity)_part.GetDefaultEntity((short)Obj3dType.o3d_planeXOY);
+            _sketch = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_sketch);
+            _sketchDefinition = (ksSketchDefinition)_sketch.GetDefinition();
+            _sketchDefinition.SetPlane(_currentPlan);
+            _sketch.Create();
+            _document2D = (ksDocument2D)_sketchDefinition.BeginEdit();
 
+            _document2D.ksCircle(xCenter, yCenter, radius, 1);
+
+            _sketchDefinition.EndEdit();
+        }
+
+        /// <summary>
+        /// Выдавливание окружности
+        /// </summary>
+        /// <param name="depth">насколько выдавить окружность</param>
+        /// <param name="thin">нужны ли стенки</param>
+        /// <param name="wallThikness">толщина стенок</param>
+        public void ExtrudeCircle(double depth, bool thin, double wallThikness = 0)
+        {
+            var entityExtrude = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
+            // интерфейс базовой операции выдавливания
+            var entityExtrudeDefinition = (ksBossExtrusionDefinition)entityExtrude.GetDefinition();
+            // интерфейс структуры параметров выдавливания
+            ksExtrusionParam extrudeParameters = (ksExtrusionParam)entityExtrudeDefinition.ExtrusionParam();
+            extrudeParameters.direction = (short)Direction_Type.dtNormal;
+            // интерфейс структуры параметров тонкой стенки
+            ksThinParam thinParam = (ksThinParam)entityExtrudeDefinition.ThinParam();
+
+            entityExtrudeDefinition.SetSketch(_sketch);
+            // тип выдавливания (строго на глубину)
+            extrudeParameters.typeNormal = (short)End_Type.etBlind;
+            // глубина выдавливания
+            extrudeParameters.depthNormal = depth;
+            // тонкая стенка в два направления
+            thinParam.thin = thin;
+            //Толщина стенки в обратном направлении
+            thinParam.reverseThickness = wallThikness;
+
+            //Направление формирования тонкой стенки
+            thinParam.thinType = (short)Direction_Type.dtReverse;
+
+            entityExtrude.Create();
+        }
+
+        public void CutExtrudeCircle()
+        {
+            var entityExtrude = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_cutExtrusion);
+            // интерфейс базовой операции выдавливания
+            var entityExtrudeDefinition = (ksCutExtrusionDefinition)entityExtrude.GetDefinition();
+            // интерфейс структуры параметров выдавливания
+            ksExtrusionParam extrudeParameters = (ksExtrusionParam)entityExtrudeDefinition.ExtrusionParam();
+            extrudeParameters.direction = (short)Direction_Type.dtMiddlePlane;
+
+            entityExtrudeDefinition.SetSketch(_sketch);
+            extrudeParameters.typeNormal = (short)End_Type.etBlind;
+            // глубина выдавливания
+            extrudeParameters.depthNormal = 100;
+            entityExtrude.Create();
         }
 
         public KompasApi()
         {
             Kompas = OpenKompas();
+            CreateDocument();
         }
     }
 }

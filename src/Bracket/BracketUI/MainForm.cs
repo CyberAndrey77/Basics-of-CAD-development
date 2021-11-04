@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace BracketUI
 {
@@ -92,10 +93,15 @@ namespace BracketUI
                 $"to {_parameters[parameterName].Max} mm";
         }
 
-        private void ShowError(object sender, string message)
+        private void ShowWarning(object sender, string message)
         {
             MessageBox.Show(message + "!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             ((TextBox)sender).Focus();
+        }
+
+        private void ShowError(string message)
+        {
+            MessageBox.Show(message + "!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void textBox_Leave(object sender, EventArgs e)
@@ -142,11 +148,11 @@ namespace BracketUI
             }
             catch (FormatException)
             {
-                ShowError(sender, "The entered is not a number");
+                ShowWarning(sender, "The entered is not a number");
             }
             catch (ArgumentException exception)
             {
-                ShowError(sender, exception.Message);
+                ShowWarning(sender, exception.Message);
             }
         }
         
@@ -218,7 +224,15 @@ namespace BracketUI
                 }
             }
 
-
+            var bracketBuilder = new BracketBuilder();
+            try
+            {
+                bracketBuilder.CreateModel(_parameters);
+            }
+            catch (COMException exception)
+            {
+                ShowError(exception.Message);
+            }
         }
     }
 }
