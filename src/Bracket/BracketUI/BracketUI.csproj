@@ -52,6 +52,7 @@
     <Compile Include="DrawingForm.Designer.cs">
       <DependentUpon>DrawingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ErrorLevel.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

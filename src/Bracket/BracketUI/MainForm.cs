@@ -93,15 +93,11 @@ namespace BracketUI
                 $"to {_parameters[parameterName].Max} mm";
         }
 
-        private void ShowWarning(object sender, string message)
+        private void ShowError(string message, object sender, ErrorLevel error)
         {
-            MessageBox.Show(message + "!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            ((TextBox)sender).Focus();
-        }
-
-        private void ShowError(string message)
-        {
-            MessageBox.Show(message + "!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(message + "!", error.ToString(), MessageBoxButtons.OK, 
+                error == ErrorLevel.Error ? MessageBoxIcon.Error : MessageBoxIcon.Warning);
+            ((Control)sender).Focus();
         }
 
         private void textBox_Leave(object sender, EventArgs e)
@@ -148,11 +144,11 @@ namespace BracketUI
             }
             catch (FormatException)
             {
-                ShowWarning(sender, "The entered is not a number");
+                ShowError("The entered is not a number", sender, ErrorLevel.Warning);
             }
             catch (ArgumentException exception)
             {
-                ShowWarning(sender, exception.Message);
+                ShowError(exception.Message, sender, ErrorLevel.Warning);
             }
         }
         
@@ -231,7 +227,7 @@ namespace BracketUI
             }
             catch (COMException exception)
             {
-                ShowError(exception.Message);
+                ShowError(exception.Message, sender, ErrorLevel.Error);
             }
         }
     }
