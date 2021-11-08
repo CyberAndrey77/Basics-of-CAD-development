@@ -35,11 +35,11 @@ namespace BracketUI
                 }
             }
 
-            foreach (var name in Enum.GetValues(typeof(ParameterName)).Cast<ParameterName>())
+            foreach (var textBox in _textBoxs)
             {
-                ChangeLabel(name);
+                ChangeLabel(textBox.Value);
             }
-            
+
             pictureBox1.Image = Properties.Resources.PlateWidth;
         }
 

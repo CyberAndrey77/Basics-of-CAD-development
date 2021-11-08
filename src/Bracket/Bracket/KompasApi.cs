@@ -109,7 +109,7 @@ namespace Bracket
         /// <param name="yCenter">задает центр окружности по Y</param>
         /// <param name="radius">задает радиус окружности</param>
         /// <param name="plane">задает плоскость для эскиза</param>
-        public void CreateCircle(double xCenter, double yCenter, double radius, int plane)
+        public void CreateCircle(double xCenter, double yCenter, double radius, Plane plane)
         {
             _currentPlan = (ksEntity)_part.GetDefaultEntity((short)(Obj3dType)plane);
             _sketch = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_sketch);

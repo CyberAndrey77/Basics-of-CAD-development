@@ -13,6 +13,9 @@ namespace Bracket
         OuterTubeDiameter,
         MountingHoleDiameter,
         HoleHeight,
-        SideWallHeight
+        SideWallHeight,
+        TubeHeight,
+        PlaneThickness,
+        TubeWallThickness
     }
 }
