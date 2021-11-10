@@ -21,89 +21,90 @@ namespace Bracket
             {ParameterName.TubeWallThickness, new Parameter(5, 5, 5, ParameterName.TubeWallThickness, "Tube Wall Thickness") }
         };
 
+        public void SetParameter(ParameterName name, double value)
+        {
+            _parameters[name].Value = value;
+            switch (name)
+            {
+                case ParameterName.OuterTubeDiameter:
+                    {
+                        double min = value + _parameters[ParameterName.PlaneThickness].Value * 2;
+                        min = min < 70 ? 70 : min;
+                        _parameters[ParameterName.PlateWidth].Min = min;
+                    }
+                    break;
+
+                case ParameterName.PlateWidth:
+                    {
+                        double max = value - _parameters[ParameterName.PlaneThickness].Value * 2;
+                        max = max > 70 ? 70 : max;
+                        _parameters[ParameterName.OuterTubeDiameter].Max = max;
+                    }
+                    break;
+
+                case ParameterName.SideWallHeight:
+                    {
+                        double maxMountingHoleDiameter =
+                            value - _parameters[ParameterName.HoleHeight].Value - 5 +
+                            _parameters[ParameterName.PlaneThickness].Value;
+
+                        maxMountingHoleDiameter = maxMountingHoleDiameter > 12 ? 12 : maxMountingHoleDiameter;
+
+                        double radius = _parameters[ParameterName.MountingHoleDiameter].Value / 2;
+                        double maxHoleHeight =
+                             value - radius - 5;
+                        maxHoleHeight = maxHoleHeight > 15 ? 15 : maxHoleHeight;
+
+                        double minHoleHeight = radius + _parameters[ParameterName.PlaneThickness].Value;
+                        minHoleHeight = minHoleHeight > 7 ? minHoleHeight : 7;
+
+                        _parameters[ParameterName.MountingHoleDiameter].Max = maxMountingHoleDiameter;
+                        _parameters[ParameterName.HoleHeight].Min = minHoleHeight;
+                        _parameters[ParameterName.HoleHeight].Max = maxHoleHeight;
+                    }
+                    break;
+
+                case ParameterName.HoleHeight:
+                    {
+                        double minSideWallHeight =
+                            _parameters[ParameterName.MountingHoleDiameter].Value / 2 + value + 5;
+                        minSideWallHeight = minSideWallHeight < 20 ? 20 : minSideWallHeight;
+
+                        double maxMountingHoleDiameter =
+                            _parameters[ParameterName.SideWallHeight].Value - value - 5 +
+                            _parameters[ParameterName.PlaneThickness].Value;
+
+                        maxMountingHoleDiameter = maxMountingHoleDiameter > 12 ? 12 : maxMountingHoleDiameter;
+
+                        _parameters[ParameterName.SideWallHeight].Min = minSideWallHeight;
+                        _parameters[ParameterName.MountingHoleDiameter].Max = maxMountingHoleDiameter;
+                    }
+                    break;
+
+                case ParameterName.MountingHoleDiameter:
+                    {
+                        double minSideWallHeight =
+                           _parameters[ParameterName.HoleHeight].Value + value / 2 + 5;
+                        minSideWallHeight = minSideWallHeight < 20 ? 20 : minSideWallHeight;
+
+                        double maxHoleHeight =
+                            _parameters[ParameterName.SideWallHeight].Value - value / 2 - 5;
+                        maxHoleHeight = maxHoleHeight > 15 ? 15 : maxHoleHeight;
+
+                        double minHoleHeight = value / 2 + _parameters[ParameterName.PlaneThickness].Value;
+                        minHoleHeight = minHoleHeight > 7 ? minHoleHeight : 7;
+
+                        _parameters[ParameterName.SideWallHeight].Min = minSideWallHeight;
+                        _parameters[ParameterName.HoleHeight].Min = minHoleHeight;
+                        _parameters[ParameterName.HoleHeight].Max = maxHoleHeight;
+                    }
+                    break;
+            }
+        }
+
         public Parameter this[ParameterName name]
         {
             get => _parameters[name];
-            set
-            {
-                _parameters[name].Value = value.Value;
-                switch (name)
-                {
-                    case ParameterName.OuterTubeDiameter:
-                        {
-                            double min = value.Value + _parameters[ParameterName.PlaneThickness].Value * 2;
-                            min = min < 70 ? 70 : min;
-                            _parameters[ParameterName.PlateWidth].Min = min;
-                        }
-                        break;
-
-                    case ParameterName.PlateWidth:
-                        {
-                            double max = value.Value - _parameters[ParameterName.PlaneThickness].Value * 2;
-                            max = max > 70 ? 70 : max;
-                            _parameters[ParameterName.OuterTubeDiameter].Max = max;
-                        }
-                        break;
-
-                    case ParameterName.SideWallHeight:
-                        {
-                            double maxMountingHoleDiameter =
-                                value.Value - _parameters[ParameterName.HoleHeight].Value - 5 + 
-                                _parameters[ParameterName.PlaneThickness].Value;
-
-                            maxMountingHoleDiameter = maxMountingHoleDiameter > 12 ? 12 : maxMountingHoleDiameter;
-
-                            double radius = _parameters[ParameterName.MountingHoleDiameter].Value / 2;
-                            double maxHoleHeight =
-                                 value.Value - radius - 5;
-                            maxHoleHeight = maxHoleHeight > 15 ? 15 : maxHoleHeight;
-
-                            double minHoleHeight = radius + _parameters[ParameterName.PlaneThickness].Value;
-                            minHoleHeight = minHoleHeight > 7 ? minHoleHeight : 7;
-
-                            _parameters[ParameterName.MountingHoleDiameter].Max = maxMountingHoleDiameter;
-                            _parameters[ParameterName.HoleHeight].Min = minHoleHeight;
-                            _parameters[ParameterName.HoleHeight].Max = maxHoleHeight;
-                        }
-                        break;
-
-                    case ParameterName.HoleHeight:
-                        {
-                            double minSideWallHeight =
-                                _parameters[ParameterName.MountingHoleDiameter].Value / 2 + value.Value + 5;
-                            minSideWallHeight = minSideWallHeight < 20 ? 20 : minSideWallHeight;
-
-                            double maxMountingHoleDiameter =
-                                _parameters[ParameterName.SideWallHeight].Value - value.Value - 5 + 
-                                _parameters[ParameterName.PlaneThickness].Value;
-
-                            maxMountingHoleDiameter = maxMountingHoleDiameter > 12 ? 12 : maxMountingHoleDiameter;
-
-                            _parameters[ParameterName.SideWallHeight].Min = minSideWallHeight;
-                            _parameters[ParameterName.MountingHoleDiameter].Max = maxMountingHoleDiameter;
-                        }
-                        break;
-
-                    case ParameterName.MountingHoleDiameter:
-                        {
-                            double minSideWallHeight =
-                               _parameters[ParameterName.HoleHeight].Value + value.Value / 2 + 5;
-                            minSideWallHeight = minSideWallHeight < 20 ? 20 : minSideWallHeight;
-
-                            double maxHoleHeight =
-                                _parameters[ParameterName.SideWallHeight].Value - value.Value / 2 - 5;
-                            maxHoleHeight = maxHoleHeight > 15 ? 15 : maxHoleHeight;
-
-                            double minHoleHeight = value.Value / 2 + _parameters[ParameterName.PlaneThickness].Value;
-                            minHoleHeight = minHoleHeight > 7 ? minHoleHeight : 7;
-
-                            _parameters[ParameterName.SideWallHeight].Min = minSideWallHeight;
-                            _parameters[ParameterName.HoleHeight].Min = minHoleHeight;
-                            _parameters[ParameterName.HoleHeight].Max = maxHoleHeight;
-                        }
-                        break;
-                }
-            }
         }
     }
 }
