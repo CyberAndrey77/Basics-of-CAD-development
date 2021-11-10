@@ -100,47 +100,52 @@ namespace BracketUI
             ((Control)sender).Focus();
         }
 
+        private void ChangeParameter(object sender)
+        {
+            ((TextBox)sender).Text = ((TextBox)sender).Text.Replace('.', ',');
+            _parameters[_textBoxs[sender]] = new Parameter(double.Parse(((TextBox)sender).Text),
+                _parameters[_textBoxs[sender]].Min, _parameters[_textBoxs[sender]].Max,
+                _parameters[_textBoxs[sender]].Name, _parameters[_textBoxs[sender]].ParameterName);
+            //_parameters[_textBoxs[sender]].Value = double.Parse(((TextBox)sender).Text);
+            switch (_textBoxs[sender])
+            {
+                case ParameterName.PlateWidth:
+                    {
+                        ChangeLabel(ParameterName.OuterTubeDiameter);
+                    }
+                    break;
+
+                case ParameterName.OuterTubeDiameter:
+                    {
+                        ChangeLabel(ParameterName.PlateWidth);
+                    }
+                    break;
+                case ParameterName.MountingHoleDiameter:
+                    {
+                        ChangeLabel(ParameterName.HoleHeight);
+                        ChangeLabel(ParameterName.SideWallHeight);
+                    }
+                    break;
+                case ParameterName.SideWallHeight:
+                    {
+                        ChangeLabel(ParameterName.HoleHeight);
+                        ChangeLabel(ParameterName.MountingHoleDiameter);
+                    }
+                    break;
+                case ParameterName.HoleHeight:
+                    {
+                        ChangeLabel(ParameterName.SideWallHeight);
+                        ChangeLabel(ParameterName.MountingHoleDiameter);
+                    }
+                    break;
+            }
+        }
+
         private void textBox_Leave(object sender, EventArgs e)
         {
             try
             {
-                ((TextBox)sender).Text = ((TextBox)sender).Text.Replace('.', ',');
-                _parameters[_textBoxs[sender]] = new Parameter(double.Parse(((TextBox)sender).Text), 
-                    _parameters[_textBoxs[sender]].Min, _parameters[_textBoxs[sender]].Max, 
-                    _parameters[_textBoxs[sender]].Name, _parameters[_textBoxs[sender]].ParameterName);
-                //_parameters[_textBoxs[sender]].Value = double.Parse(((TextBox)sender).Text);
-                switch(_textBoxs[sender])
-                {
-                    case ParameterName.PlateWidth:
-                        {
-                            ChangeLabel(ParameterName.OuterTubeDiameter);
-                        }
-                        break;
-
-                    case ParameterName.OuterTubeDiameter:
-                        {
-                            ChangeLabel(ParameterName.PlateWidth);
-                        }
-                        break;
-                    case ParameterName.MountingHoleDiameter:
-                        {
-                            ChangeLabel(ParameterName.HoleHeight);
-                            ChangeLabel(ParameterName.SideWallHeight);
-                        }
-                        break;
-                    case ParameterName.SideWallHeight:
-                        {
-                            ChangeLabel(ParameterName.HoleHeight);
-                            ChangeLabel(ParameterName.MountingHoleDiameter);
-                        }
-                        break;
-                    case ParameterName.HoleHeight:
-                        {
-                            ChangeLabel(ParameterName.SideWallHeight);
-                            ChangeLabel(ParameterName.MountingHoleDiameter);
-                        }
-                        break;
-                }
+                ChangeParameter(sender);
             }
             catch (FormatException)
             {
@@ -216,9 +221,21 @@ namespace BracketUI
             {
                 if (textBox is TextBox)
                 {
-                    textBox_Leave(textBox, e);
+                    try
+                    {
+                        ChangeParameter(textBox);
+                    }
+                    catch (FormatException)
+                    {
+                        ShowError("The entered is not a number", sender, ErrorLevel.Warning);
+                    }
+                    catch (ArgumentException exception)
+                    {
+                        ShowError(exception.Message, sender, ErrorLevel.Warning);
+                    }
                 }
             }
+           
 
             var bracketBuilder = new BracketBuilder();
             try
