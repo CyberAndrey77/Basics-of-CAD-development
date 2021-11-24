@@ -10,15 +10,15 @@ namespace Bracket
     {
         private Dictionary<ParameterName, Parameter> _parameters = new Dictionary<ParameterName, Parameter>()
         {
-            {ParameterName.PlateWidth, new Parameter(80, 70, 100, ParameterName.PlateWidth, "Plate Width") },
-            {ParameterName.PlateLength, new Parameter(120, 100, 130, ParameterName.PlateLength, "Plate Length") },
-            {ParameterName.OuterTubeDiameter, new Parameter(60, 50, 70, ParameterName.OuterTubeDiameter, "Outer Tube Diameter") },
-            {ParameterName.MountingHoleDiameter, new Parameter(10, 5, 12, ParameterName.MountingHoleDiameter, "Mounting Hole Diameter") },
-            {ParameterName.HoleHeight, new Parameter(10, 8, 15, ParameterName.HoleHeight, "Hole Height") },
-            {ParameterName.SideWallHeight, new Parameter(25, 20, 30, ParameterName.SideWallHeight, "Side Wall Height") },
-            {ParameterName.PlaneThickness, new Parameter(3, 3, 3, ParameterName.PlaneThickness, "Plane Thickness") },
-            {ParameterName.TubeHeight, new Parameter(81, 81, 81, ParameterName.TubeHeight, "Tube Height") },
-            {ParameterName.TubeWallThickness, new Parameter(5, 5, 5, ParameterName.TubeWallThickness, "Tube Wall Thickness") }
+            {ParameterName.PlateWidth, new Parameter(80, 70, 100, ParameterName.PlateWidth) },
+            {ParameterName.PlateLength, new Parameter(120, 100, 130, ParameterName.PlateLength) },
+            {ParameterName.OuterTubeDiameter, new Parameter(60, 50, 70, ParameterName.OuterTubeDiameter) },
+            {ParameterName.MountingHoleDiameter, new Parameter(10, 5, 12, ParameterName.MountingHoleDiameter) },
+            {ParameterName.HoleHeight, new Parameter(10, 8, 15, ParameterName.HoleHeight) },
+            {ParameterName.SideWallHeight, new Parameter(25, 20, 30, ParameterName.SideWallHeight) },
+            {ParameterName.PlaneThickness, new Parameter(3, 3, 3, ParameterName.PlaneThickness) },
+            {ParameterName.TubeHeight, new Parameter(81, 81, 81, ParameterName.TubeHeight) },
+            {ParameterName.TubeWallThickness, new Parameter(5, 5, 5, ParameterName.TubeWallThickness) }
         };
 
         public void SetParameter(ParameterName name, double value)

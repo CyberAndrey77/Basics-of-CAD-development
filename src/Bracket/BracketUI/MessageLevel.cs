@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace BracketUI
 {
-    public enum ErrorLevel
+    public enum MessageLevel
     {
+        Info,
         Warning,
         Error
     }

@@ -9,8 +9,37 @@ namespace Bracket
     public class Parameter
     {
         private double _value;
-        public double Max { get; set; }
-        public double Min { get; set; }
+        private double _max;
+        private double _min;
+        private string _parameterName;
+        public double Max 
+        {
+            get => _max; 
+            set
+            {
+                if (value < Min)
+                {
+                    throw new ArgumentException($"Max value cannot be less than the Min");
+                }
+                if (value < 0)
+                {
+                    throw new ArgumentException($"Value must be greater than zero");
+                }
+                _max = value;   
+            }
+        }
+        public double Min 
+        { 
+            get => _min;
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException($"Value must be greater than zero");
+                }
+                _min = value;
+            }
+        }
         public double Value
         {
             get => _value;
@@ -18,21 +47,25 @@ namespace Bracket
             {
                 if (value < Min || value > Max)
                 {
-                    throw new ArgumentException($"{ParameterName} must be greater than {Min} mm and not greater than {Max} mm, it was {value} mm");
+                    throw new ArgumentException($"{_parameterName} must be greater than {Min} mm and not greater than " +
+                        $"{Max} mm, it was {value} mm");
                 }
                 _value = value;
             }
         }
         public ParameterName Name { get; set; }
-        public string ParameterName { get; set; }
 
-        public Parameter(double value, double min, double max, ParameterName name, string parameterName)
+        public Parameter(double value, double min, double max, ParameterName name)
         {
             Min = min;
             Max = max;
             Name = name;
-            ParameterName = parameterName;
+            _parameterName = System.Text.RegularExpressions.Regex.Replace(name.ToString(), "([a-z])([A-Z])", "$1 $2");
             Value = value;
+        }
+
+        public Parameter()
+        {
         }
     }
 }

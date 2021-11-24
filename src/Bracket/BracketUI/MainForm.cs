@@ -93,10 +93,11 @@ namespace BracketUI
                 $"to {_parameters[parameterName].Max} mm";
         }
 
-        private void ShowError(string message, object sender, ErrorLevel error)
+        private void ShowMessage(string message, object sender, MessageLevel level)
         {
-            MessageBox.Show(message + "!", error.ToString(), MessageBoxButtons.OK, 
-                error == ErrorLevel.Error ? MessageBoxIcon.Error : MessageBoxIcon.Warning);
+            MessageBox.Show(message + "!", level.ToString(), MessageBoxButtons.OK, 
+                level == MessageLevel.Error ? MessageBoxIcon.Error : 
+                level == MessageLevel.Warning ? MessageBoxIcon.Warning : MessageBoxIcon.Information);
             ((Control)sender).Focus();
         }
 
@@ -146,11 +147,11 @@ namespace BracketUI
             }
             catch (FormatException)
             {
-                ShowError("The entered is not a number", sender, ErrorLevel.Warning);
+                ShowMessage("The entered is not a number", sender, MessageLevel.Warning);
             }
             catch (ArgumentException exception)
             {
-                ShowError(exception.Message, sender, ErrorLevel.Warning);
+                ShowMessage(exception.Message, sender, MessageLevel.Warning);
             }
         }
         
@@ -224,19 +225,20 @@ namespace BracketUI
                     }
                 }
                 var bracketBuilder = new BracketBuilder();
+                ShowMessage("Model will now begin construction", sender, MessageLevel.Info);
                 bracketBuilder.CreateModel(_parameters);
             }
             catch (FormatException)
             {
-                ShowError("The entered is not a number", sender, ErrorLevel.Warning);
+                ShowMessage("The entered is not a number", sender, MessageLevel.Warning);
             }
             catch (ArgumentException exception)
             {
-                ShowError(exception.Message, sender, ErrorLevel.Warning);
+                ShowMessage(exception.Message, sender, MessageLevel.Warning);
             }
             catch (COMException exception)
             {
-                ShowError(exception.Message, sender, ErrorLevel.Error);
+                ShowMessage(exception.Message, sender, MessageLevel.Error);
             }
         }
     }

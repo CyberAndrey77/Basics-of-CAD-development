@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit;
-using NUnit.Framework;
-using Bracket;
+﻿using NUnit.Framework;
+using System;
 
 namespace Bracket.UnitTests
 {
@@ -20,10 +14,9 @@ namespace Bracket.UnitTests
             var expectedMin = 10.0;
             var expectedMax = 20.0;
             var expectedName = ParameterName.PlateWidth;
-            var expectedParameterName = "Plate Width";
 
             //Act
-            var parameter = new Parameter(expectedValue, expectedMin, expectedMax, expectedName, expectedParameterName);
+            var parameter = new Parameter(expectedValue, expectedMin, expectedMax, expectedName);
 
             //Assert
             Assert.Multiple(() =>
@@ -32,44 +25,161 @@ namespace Bracket.UnitTests
                 Assert.AreEqual(expectedMax, parameter.Max);
                 Assert.AreEqual(expectedMin, parameter.Min);
                 Assert.AreEqual(expectedName, parameter.Name);
-                Assert.AreEqual(expectedParameterName, parameter.ParameterName);
             });
         }
 
-        [TestCase(TestName = "Значение параметра меньше минимального порога")]
-        public void SetMinimumValue_ArgumentExcepton()
+        [TestCase(TestName = "Проверка геттера и сеттера у свойства Min на отрицательные значения")]
+        public void SetMin_MinLessZero_ArgumentException()
         {
-            //Setup
-            double minValue = 10.0;
-            double maxValue = 20.0;
-            double value = 5.0;
-            var name = ParameterName.PlateWidth;
-            var parameterName = "PlateWidth";
+            //Arrange
+            var expectedMin = -1.0;
+            var parameter = new Parameter();
 
             //Assert
             Assert.Throws<ArgumentException>(() =>
             {
                 //Act
-                var parameter = new Parameter(value, minValue, maxValue, name, parameterName);
+                parameter.Min = expectedMin;
+            });
+        }
+
+        [TestCase(TestName = "Проверка геттера и сеттера у свойства Min на внесение корректных значений")]
+        public void SetCorrectMin_ResultCorrectSet()
+        {
+            //Arrange
+            var expectedMin = 1.0;
+            var parameter = new Parameter();
+
+            //Act
+            parameter.Min = expectedMin;
+
+            //Assert
+            Assert.AreEqual(expectedMin, parameter.Min);
+        }
+
+        [TestCase(TestName = "Проверка геттера и сеттера у свойства Max на отрицательные значения")]
+        public void SetMAx_MAxLessZero_ArgumentException()
+        {
+            //Arrange
+            var expectedMax = -1.0;
+            var parameter = new Parameter();
+
+            //Assert
+            Assert.Throws<ArgumentException>(() =>
+            {
+                //Act
+                parameter.Max = expectedMax;
+            });
+        }
+
+        [TestCase(TestName = "Проверка геттера и сеттера у свойства Max, меньше ли он свойства Min")]
+        public void SetMax_MaxLessMin_ArgumentException()
+        {
+            //Arrange
+            var expectedMin = 10.0;
+            var expectedMax = 5.0;
+            var parameter = new Parameter() { Min = expectedMin };
+
+            //Assert
+            Assert.Throws<ArgumentException>(() =>
+            {
+                //Act
+                parameter.Max = expectedMax;
+            });
+        }
+
+        [TestCase(TestName = "Проверка геттера и сеттера у свойства Max на внесение корректных значений")]
+        public void SetCorrectMax_ResultCorrectSet()
+        {
+            //Arrange
+            var expectedMin = 1.0;
+            var expectedMax = 5.0;
+            var parameter = new Parameter()
+            {
+                Min = expectedMin
+            };
+
+            //Act
+            parameter.Max = expectedMax;
+
+            //Assert
+            Assert.AreEqual(expectedMax, parameter.Max);
+        }
+
+        [TestCase(TestName = "Значение параметра меньше минимального порога")]
+        public void SetMinimumValue_ArgumentExcepton()
+        {
+            //Arrange
+            var expectedMin = 10.0;
+            var expectedMax = 20.0;
+            var expectedValue = 5.0;
+            var parameter = new Parameter()
+            {
+                Min = expectedMin,
+                Max = expectedMax
+            };
+
+            //Assert
+            Assert.Throws<ArgumentException>(() =>
+            {
+                //Act
+                parameter.Value = expectedValue;
             });
         }
 
         [TestCase(TestName = "Значение параметра больше максимального порога")]
         public void SetMaximumValue_ArgumentExcepton()
         {
-            //Setup
-            double minValue = 10.0;
-            double maxValue = 20.0;
-            double value = 25.0;
-            var name = ParameterName.PlateWidth;
-            var parameterName = "PlateWidth";
+            //Arrange
+            var expectedMin = 10.0;
+            var expectedMax = 20.0;
+            var expectedValue = 25.0;
+            var parameter = new Parameter()
+            {
+                Min = expectedMin,
+                Max = expectedMax
+            };
 
             //Assert
             Assert.Throws<ArgumentException>(() =>
             {
                 //Act
-                var parameter = new Parameter(value, minValue, maxValue, name, parameterName);
+                parameter.Value = expectedValue;
             });
+        }
+
+        [TestCase(TestName = "Проверка геттера и сеттера у свойства Value на внесение корректных значений")]
+        public void SetCorrectValue_ResultCorrectSet()
+        {
+            //Arrange
+            var expectedMin = 10.0;
+            var expectedMax = 20.0;
+            var expectedValue = 15.0;
+            var parameter = new Parameter()
+            {
+                Min = expectedMin,
+                Max = expectedMax
+            };
+
+            //Act
+            parameter.Value = expectedValue;
+
+            //Assert
+            Assert.AreEqual(expectedValue, parameter.Value);
+        }
+
+        [TestCase(TestName = "Проверка геттера и сеттера у свойства Name на внесение корректных значений")]
+        public void SetName_ResultCorrectSet()
+        {
+            //Arrange
+            var expectedName = ParameterName.PlateLength;
+            var parameter = new Parameter();
+
+            //Act
+            parameter.Name = expectedName;
+
+            //Assert
+            Assert.AreEqual(expectedName, parameter.Name);
         }
     }
 }
