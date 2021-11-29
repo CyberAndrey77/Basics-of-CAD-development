@@ -4,6 +4,10 @@ namespace Bracket
 {
     public class BracketParameters
     {
+        private const double MIN_SIDE_WALL_HEIGHT = 20;
+        private const double MAX_HOLE_HEIGHT = 15;
+        private const double MIN_HOLE_HEIGHT = 7;
+        private const double MAX_MOUNTING_HOLE_RADIUS = 6;
         /// <summary>
         /// Словарь содержит параметры кронштейна.
         /// </summary>
@@ -44,21 +48,18 @@ namespace Bracket
                             value - _parameters[ParameterName.HoleHeight].Min - 
                             _parameters[ParameterName.DistanceFromWall].Value + _parameters[ParameterName.PlaneThickness].Value;
 
-                        double maxValueMountingHoleRadius = 6;
-                        maxMountingHoleRadius = maxMountingHoleRadius > maxValueMountingHoleRadius ?
-                            maxValueMountingHoleRadius : maxMountingHoleRadius;
+                        maxMountingHoleRadius = maxMountingHoleRadius > MAX_MOUNTING_HOLE_RADIUS ?
+                            MAX_MOUNTING_HOLE_RADIUS : maxMountingHoleRadius;
 
-                        double radius = _parameters[ParameterName.MountingHoleRadius].Max;
+                        double radius = _parameters[ParameterName.MountingHoleRadius].Value;
                         double maxHoleHeight =
-                             value + radius - _parameters[ParameterName.DistanceFromWall].Value;//-
+                             value - radius - _parameters[ParameterName.DistanceFromWall].Value;//+
 
-                        double maxValueHoleHeight = 15;
-                        maxHoleHeight = maxHoleHeight > maxValueHoleHeight ? maxValueHoleHeight : maxHoleHeight;
+                        maxHoleHeight = maxHoleHeight > MAX_HOLE_HEIGHT ? MAX_HOLE_HEIGHT : maxHoleHeight;
 
                         double minHoleHeight = _parameters[ParameterName.MountingHoleRadius].Value + _parameters[ParameterName.PlaneThickness].Value;
 
-                        double minValueHoleHeight = 7;
-                        minHoleHeight = minHoleHeight > minValueHoleHeight ? minHoleHeight : minValueHoleHeight;
+                        minHoleHeight = minHoleHeight > MIN_HOLE_HEIGHT ? minHoleHeight : MIN_HOLE_HEIGHT;
 
                         _parameters[ParameterName.MountingHoleRadius].Max = maxMountingHoleRadius;
                         _parameters[ParameterName.HoleHeight].Min = minHoleHeight;
@@ -72,16 +73,15 @@ namespace Bracket
                             _parameters[ParameterName.MountingHoleRadius].Value + value + 
                             _parameters[ParameterName.DistanceFromWall].Value;
 
-                        double minValueSideWallHeight = 20;
-                        minSideWallHeight = minSideWallHeight < minValueSideWallHeight ? minValueSideWallHeight : minSideWallHeight;
+                        minSideWallHeight = minSideWallHeight < MIN_SIDE_WALL_HEIGHT ? MIN_SIDE_WALL_HEIGHT : minSideWallHeight;
 
                         double maxMountingHoleRadius =
-                            _parameters[ParameterName.SideWallHeight].Max - value -
-                            _parameters[ParameterName.DistanceFromWall].Value + _parameters[ParameterName.PlaneThickness].Value;
+                            _parameters[ParameterName.SideWallHeight].Value - value -
+                            _parameters[ParameterName.DistanceFromWall].Value;// - _parameters[ParameterName.PlaneThickness].Value;
 
-                        double maxValueMountingHoleRadius = 6;
-                        maxMountingHoleRadius = maxMountingHoleRadius > maxValueMountingHoleRadius ?
-                            maxValueMountingHoleRadius : maxMountingHoleRadius;
+                        
+                        maxMountingHoleRadius = maxMountingHoleRadius > MAX_MOUNTING_HOLE_RADIUS ?
+                            MAX_MOUNTING_HOLE_RADIUS : maxMountingHoleRadius;
 
                         _parameters[ParameterName.SideWallHeight].Min = minSideWallHeight;
                         _parameters[ParameterName.MountingHoleRadius].Max = maxMountingHoleRadius;
@@ -94,20 +94,17 @@ namespace Bracket
                            _parameters[ParameterName.HoleHeight].Value + value + 
                            _parameters[ParameterName.DistanceFromWall].Value;
 
-                        double minValueSideWallHeight = 20;
-                        minSideWallHeight = minSideWallHeight < minValueSideWallHeight ? minValueSideWallHeight : minSideWallHeight;
+                        minSideWallHeight = minSideWallHeight < MIN_SIDE_WALL_HEIGHT ? MIN_SIDE_WALL_HEIGHT : minSideWallHeight;
 
                         double maxHoleHeight =
-                            _parameters[ParameterName.SideWallHeight].Max - value -
+                            _parameters[ParameterName.SideWallHeight].Value - value -
                             _parameters[ParameterName.DistanceFromWall].Value;
 
-                        double maxValueHoleHeight = 15;
-                        maxHoleHeight = maxHoleHeight > maxValueHoleHeight ? maxValueHoleHeight : maxHoleHeight;
+                        maxHoleHeight = maxHoleHeight > MAX_HOLE_HEIGHT ? MAX_HOLE_HEIGHT : maxHoleHeight;
 
                         double minHoleHeight = value + _parameters[ParameterName.PlaneThickness].Value;
 
-                        double minValueHoleHeight = 7;
-                        minHoleHeight = minHoleHeight > minValueHoleHeight ? minHoleHeight : minValueHoleHeight;
+                        minHoleHeight = minHoleHeight > MIN_HOLE_HEIGHT ? minHoleHeight : MIN_HOLE_HEIGHT;
 
                         _parameters[ParameterName.SideWallHeight].Min = minSideWallHeight;
                         _parameters[ParameterName.HoleHeight].Min = minHoleHeight;

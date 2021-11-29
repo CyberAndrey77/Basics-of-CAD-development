@@ -186,12 +186,36 @@ namespace Bracket.UnitTests
             Assert.AreEqual(expectedMinSideWallHeight, actualMinSideWallHeight);
         }
 
-        [TestCase(TestName = "Изменение зависимого параметра HoleHeight путем " +
-            "изменения SideWallHeight")]
+        [TestCase(TestName = "Изменение зависимого параметра HoleHeight путем изменения SideWallHeight")]
         public void ChangeHoleHeight_SetValueSideWallHeight_ResultCorrect()
         {
             //Arrange
-            var expectedMinSideWallHeight = 26;
+            var expectedMaxHoleHeight = 10;
+            Dictionary<ParameterName, Parameter> parameters = new Dictionary<ParameterName, Parameter>
+            {
+                {ParameterName.MountingHoleRadius, new Parameter(5, 2.5, 6, ParameterName.MountingHoleRadius) },
+                {ParameterName.HoleHeight, new Parameter(10, 8, 15, ParameterName.HoleHeight) },
+                {ParameterName.SideWallHeight, new Parameter(25, 20, 30, ParameterName.SideWallHeight) },
+                {ParameterName.PlaneThickness, new Parameter(3, 3, 3, ParameterName.PlaneThickness) },
+                {ParameterName.DistanceFromWall, new Parameter(5, 5, 5, ParameterName.DistanceFromWall) }
+            };
+            var bracketParameters = new BracketParameters(parameters);
+
+            //Act
+            //вводим минимальное значение для высоты стенки
+            bracketParameters.SetParameter(ParameterName.SideWallHeight, 20);
+            var actualMaxHoleHeight = bracketParameters[ParameterName.HoleHeight].Max;
+
+            //Assert
+            Assert.AreEqual(expectedMaxHoleHeight, actualMaxHoleHeight);
+        }
+
+        [TestCase(TestName = "Изменение минимума параметра HoleHeight путем " +
+            "изменения MountingHoleRadius на максимальное значение")]
+        public void ChangeMinHoleHeight_SetMaxMountingHoleRadius_ResultCorrect()
+        {
+            //Arrange
+            var expectedMinHoleHeight = 9;
             Dictionary<ParameterName, Parameter> parameters = new Dictionary<ParameterName, Parameter>
             {
                 {ParameterName.MountingHoleRadius, new Parameter(5, 2.5, 6, ParameterName.MountingHoleRadius) },
@@ -204,11 +228,61 @@ namespace Bracket.UnitTests
 
             //Act
             //вводим максимальное значение для радиуса отверстия
-            bracketParameters.SetParameter(ParameterName.SideWallHeight, 6);
-            var actualMinSideWallHeight = bracketParameters[ParameterName.SideWallHeight].Min;
+            bracketParameters.SetParameter(ParameterName.MountingHoleRadius, 6);
+            var actualMinHoleHeight = bracketParameters[ParameterName.HoleHeight].Min;
 
             //Assert
-            Assert.AreEqual(expectedMinSideWallHeight, actualMinSideWallHeight);
+            Assert.AreEqual(expectedMinHoleHeight, actualMinHoleHeight);
+        }
+
+        [TestCase(TestName = "Изменение минимума параметра HoleHeight путем " +
+            "изменения MountingHoleRadius на минимальное значение")]
+        public void ChangeMinHoleHeight_SetMinMountingHoleRadius_ResultCorrect()
+        {
+            //Arrange
+            var expectedMinHoleHeight = 7;
+            Dictionary<ParameterName, Parameter> parameters = new Dictionary<ParameterName, Parameter>
+            {
+                {ParameterName.MountingHoleRadius, new Parameter(5, 2.5, 6, ParameterName.MountingHoleRadius) },
+                {ParameterName.HoleHeight, new Parameter(10, 8, 15, ParameterName.HoleHeight) },
+                {ParameterName.SideWallHeight, new Parameter(25, 20, 30, ParameterName.SideWallHeight) },
+                {ParameterName.PlaneThickness, new Parameter(3, 3, 3, ParameterName.PlaneThickness) },
+                {ParameterName.DistanceFromWall, new Parameter(5, 5, 5, ParameterName.DistanceFromWall) }
+            };
+            var bracketParameters = new BracketParameters(parameters);
+
+            //Act
+            //вводим минимальное значение для радиуса отверстия
+            bracketParameters.SetParameter(ParameterName.MountingHoleRadius, 2.5);
+            var actualMinHoleHeight = bracketParameters[ParameterName.HoleHeight].Min;
+
+            //Assert
+            Assert.AreEqual(expectedMinHoleHeight, actualMinHoleHeight);
+        }
+
+        [TestCase(TestName = "Изменение максимума параметра HoleHeight путем " +
+            "изменения MountingHoleRadius на максимальное значение")]
+        public void ChangeMaxHoleHeight_SetMaxMountingHoleRadius_ResultCorrect()
+        {
+            //Arrange
+            var expectedMaxHoleHeight = 14;
+            Dictionary<ParameterName, Parameter> parameters = new Dictionary<ParameterName, Parameter>
+            {
+                {ParameterName.MountingHoleRadius, new Parameter(5, 2.5, 6, ParameterName.MountingHoleRadius) },
+                {ParameterName.HoleHeight, new Parameter(10, 8, 15, ParameterName.HoleHeight) },
+                {ParameterName.SideWallHeight, new Parameter(25, 20, 30, ParameterName.SideWallHeight) },
+                {ParameterName.PlaneThickness, new Parameter(3, 3, 3, ParameterName.PlaneThickness) },
+                {ParameterName.DistanceFromWall, new Parameter(5, 5, 5, ParameterName.DistanceFromWall) }
+            };
+            var bracketParameters = new BracketParameters(parameters);
+
+            //Act
+            //вводим минимальное значение для радиуса отверстия
+            bracketParameters.SetParameter(ParameterName.MountingHoleRadius, 6);
+            var actualMaxHoleHeight = bracketParameters[ParameterName.HoleHeight].Max;
+
+            //Assert
+            Assert.AreEqual(expectedMaxHoleHeight, actualMaxHoleHeight);
         }
     }
 }
