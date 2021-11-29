@@ -43,75 +43,80 @@ namespace Bracket
 
                 case ParameterName.SideWallHeight:
                     {
-
-                        double maxMountingHoleRadius =
-                            value - _parameters[ParameterName.HoleHeight].Min - 
-                            _parameters[ParameterName.DistanceFromWall].Value + _parameters[ParameterName.PlaneThickness].Value;
-
-                        maxMountingHoleRadius = maxMountingHoleRadius > MAX_MOUNTING_HOLE_RADIUS ?
-                            MAX_MOUNTING_HOLE_RADIUS : maxMountingHoleRadius;
-
-                        double radius = _parameters[ParameterName.MountingHoleRadius].Value;
-                        double maxHoleHeight =
-                             value - radius - _parameters[ParameterName.DistanceFromWall].Value;//+
-
-                        maxHoleHeight = maxHoleHeight > MAX_HOLE_HEIGHT ? MAX_HOLE_HEIGHT : maxHoleHeight;
-
-                        double minHoleHeight = _parameters[ParameterName.MountingHoleRadius].Value + _parameters[ParameterName.PlaneThickness].Value;
-
-                        minHoleHeight = minHoleHeight > MIN_HOLE_HEIGHT ? minHoleHeight : MIN_HOLE_HEIGHT;
-
-                        _parameters[ParameterName.MountingHoleRadius].Max = maxMountingHoleRadius;
-                        _parameters[ParameterName.HoleHeight].Min = minHoleHeight;
-                        _parameters[ParameterName.HoleHeight].Max = maxHoleHeight;
+                        SetMaxMountingHoleRadius();
+                        SetMaxHoleHeight();
+                        SetMinHoleHeight();
                     }
                     break;
 
                 case ParameterName.HoleHeight:
                     {
-                        double minSideWallHeight =
-                            _parameters[ParameterName.MountingHoleRadius].Value + value + 
-                            _parameters[ParameterName.DistanceFromWall].Value;
-
-                        minSideWallHeight = minSideWallHeight < MIN_SIDE_WALL_HEIGHT ? MIN_SIDE_WALL_HEIGHT : minSideWallHeight;
-
-                        double maxMountingHoleRadius =
-                            _parameters[ParameterName.SideWallHeight].Value - value -
-                            _parameters[ParameterName.DistanceFromWall].Value;// - _parameters[ParameterName.PlaneThickness].Value;
-
-                        
-                        maxMountingHoleRadius = maxMountingHoleRadius > MAX_MOUNTING_HOLE_RADIUS ?
-                            MAX_MOUNTING_HOLE_RADIUS : maxMountingHoleRadius;
-
-                        _parameters[ParameterName.SideWallHeight].Min = minSideWallHeight;
-                        _parameters[ParameterName.MountingHoleRadius].Max = maxMountingHoleRadius;
+                        SetMinSideWallHeight();
+                        SetMaxMountingHoleRadius();
                     }
                     break;
 
                 case ParameterName.MountingHoleRadius:
                     {
-                        double minSideWallHeight =
-                           _parameters[ParameterName.HoleHeight].Value + value + 
-                           _parameters[ParameterName.DistanceFromWall].Value;
-
-                        minSideWallHeight = minSideWallHeight < MIN_SIDE_WALL_HEIGHT ? MIN_SIDE_WALL_HEIGHT : minSideWallHeight;
-
-                        double maxHoleHeight =
-                            _parameters[ParameterName.SideWallHeight].Value - value -
-                            _parameters[ParameterName.DistanceFromWall].Value;
-
-                        maxHoleHeight = maxHoleHeight > MAX_HOLE_HEIGHT ? MAX_HOLE_HEIGHT : maxHoleHeight;
-
-                        double minHoleHeight = value + _parameters[ParameterName.PlaneThickness].Value;
-
-                        minHoleHeight = minHoleHeight > MIN_HOLE_HEIGHT ? minHoleHeight : MIN_HOLE_HEIGHT;
-
-                        _parameters[ParameterName.SideWallHeight].Min = minSideWallHeight;
-                        _parameters[ParameterName.HoleHeight].Min = minHoleHeight;
-                        _parameters[ParameterName.HoleHeight].Max = maxHoleHeight;
+                        SetMinSideWallHeight();
+                        SetMaxHoleHeight();
+                        SetMinHoleHeight();
                     }
                     break;
             }
+        }
+
+        private void SetMaxMountingHoleRadius()
+        {
+            double maxMountingHoleRadius;
+            if (_parameters[ParameterName.MountingHoleRadius].Value + 
+                _parameters[ParameterName.PlaneThickness].Value > _parameters[ParameterName.HoleHeight].Value)
+            {
+                maxMountingHoleRadius = _parameters[ParameterName.SideWallHeight].Value -
+                (_parameters[ParameterName.HoleHeight].Value - _parameters[ParameterName.PlaneThickness].Value) -
+                _parameters[ParameterName.DistanceFromWall].Value;
+            }
+            else
+            {
+                maxMountingHoleRadius = _parameters[ParameterName.SideWallHeight].Value -
+                _parameters[ParameterName.HoleHeight].Value -
+                _parameters[ParameterName.DistanceFromWall].Value;
+            }
+
+            maxMountingHoleRadius = maxMountingHoleRadius > MAX_MOUNTING_HOLE_RADIUS ? 
+                MAX_MOUNTING_HOLE_RADIUS : maxMountingHoleRadius;
+
+            _parameters[ParameterName.MountingHoleRadius].Max = maxMountingHoleRadius;
+        }
+
+        private void SetMinSideWallHeight()
+        {
+            var minSideWallHeight = _parameters[ParameterName.HoleHeight].Value + 
+                _parameters[ParameterName.MountingHoleRadius].Value + _parameters[ParameterName.DistanceFromWall].Value;
+
+            minSideWallHeight = minSideWallHeight < MIN_SIDE_WALL_HEIGHT ? MIN_SIDE_WALL_HEIGHT : minSideWallHeight;
+
+            _parameters[ParameterName.SideWallHeight].Min = minSideWallHeight;
+        }
+
+        private void SetMaxHoleHeight()
+        {
+            var maxHoleHeight = _parameters[ParameterName.SideWallHeight].Value - 
+                _parameters[ParameterName.DistanceFromWall].Value - _parameters[ParameterName.MountingHoleRadius].Value;
+
+            maxHoleHeight = maxHoleHeight < MAX_HOLE_HEIGHT ? maxHoleHeight : MAX_HOLE_HEIGHT;
+
+            _parameters[ParameterName.HoleHeight].Max = maxHoleHeight;
+        }
+
+        private void SetMinHoleHeight()
+        {
+            var minHoleHeight = _parameters[ParameterName.MountingHoleRadius].Value + 
+                _parameters[ParameterName.PlaneThickness].Value;
+
+            minHoleHeight = minHoleHeight < MIN_HOLE_HEIGHT ? MIN_HOLE_HEIGHT : minHoleHeight;
+
+            _parameters[ParameterName.HoleHeight].Min = minHoleHeight;
         }
 
         /// <summary>
