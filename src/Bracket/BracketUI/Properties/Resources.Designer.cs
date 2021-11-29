@@ -83,9 +83,9 @@ namespace BracketUI.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap MountingHoleDiameter {
+        internal static System.Drawing.Bitmap MountingHoleRadius {
             get {
-                object obj = ResourceManager.GetObject("MountingHoleDiameter", resourceCulture);
+                object obj = ResourceManager.GetObject("MountingHoleRadius", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

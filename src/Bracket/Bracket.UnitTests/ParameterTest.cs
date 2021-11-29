@@ -181,5 +181,20 @@ namespace Bracket.UnitTests
             //Assert
             Assert.AreEqual(expectedName, parameter.Name);
         }
+
+        [TestCase(TestName = "Проверка геттера у свойства ParameterName")]
+        public void SetParameterName_ResultCorrectSet()
+        {
+            //Arrange
+            var expectedName = ParameterName.PlateLength;
+            var expectedParameterName = "Plate Length";
+            var parameter = new Parameter();
+
+            //Act
+            parameter.Name = expectedName;
+
+            //Assert
+            Assert.AreEqual(expectedParameterName, parameter.ParameterName);
+        }
     }
 }

@@ -106,7 +106,7 @@ namespace BracketUI
             this.outerTubeDiameterLabel.Name = "outerTubeDiameterLabel";
             this.outerTubeDiameterLabel.Size = new System.Drawing.Size(165, 17);
             this.outerTubeDiameterLabel.TabIndex = 5;
-            this.outerTubeDiameterLabel.Text = "Outer Tube Diameter (C)";
+            this.outerTubeDiameterLabel.Text = "Outer Tube Radius (C)";
             // 
             // mountingHoleDiameterLabel
             // 

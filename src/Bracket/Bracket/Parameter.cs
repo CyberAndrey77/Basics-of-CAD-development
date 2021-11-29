@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bracket
 {
-    public class Parameter
+    public class Parameter : IEquatable<Parameter>
     {
         private double _value;
         private double _max;
         private double _min;
+        private ParameterName _name;
         private string _parameterName;
-        public double Max 
+        public double Max
         {
-            get => _max; 
+            get => _max;
             set
             {
                 if (value < Min)
@@ -25,11 +22,11 @@ namespace Bracket
                 {
                     throw new ArgumentException($"Value must be greater than zero");
                 }
-                _max = value;   
+                _max = value;
             }
         }
-        public double Min 
-        { 
+        public double Min
+        {
             get => _min;
             set
             {
@@ -53,19 +50,37 @@ namespace Bracket
                 _value = value;
             }
         }
-        public ParameterName Name { get; set; }
+        public ParameterName Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                _parameterName = System.Text.RegularExpressions.Regex.Replace(value.ToString(), "([a-z])([A-Z])", "$1 $2");
+            }
+        }
+
+        public string ParameterName { get => _parameterName; }
 
         public Parameter(double value, double min, double max, ParameterName name)
         {
             Min = min;
             Max = max;
             Name = name;
-            _parameterName = System.Text.RegularExpressions.Regex.Replace(name.ToString(), "([a-z])([A-Z])", "$1 $2");
             Value = value;
         }
 
         public Parameter()
         {
+        }
+
+        public bool Equals(Parameter other)
+        {
+            return _max == other._max
+                && _min == other._min
+                && _name == other._name
+                && _parameterName == other._parameterName
+                && _value == other._value;
         }
     }
 }

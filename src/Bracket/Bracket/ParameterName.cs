@@ -11,11 +11,12 @@ namespace Bracket
         PlateWidth,
         PlateLength,
         OuterTubeDiameter,
-        MountingHoleDiameter,
+        MountingHoleRadius,
         HoleHeight,
         SideWallHeight,
         TubeHeight,
         PlaneThickness,
-        TubeWallThickness
+        TubeWallThickness,
+        DistanceFromWall
     }
 }

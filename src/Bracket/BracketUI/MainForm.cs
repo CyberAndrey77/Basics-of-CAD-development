@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using System.Drawing;
 
 namespace BracketUI
 {
@@ -21,7 +22,7 @@ namespace BracketUI
                 { plateLengthTextBox, ParameterName.PlateLength },
                 { plateWidthTextBox, ParameterName.PlateWidth },
                 { outerTubeDiameterTextBox, ParameterName.OuterTubeDiameter },
-                { mountingHoleDiameterTextBox, ParameterName.MountingHoleDiameter },
+                { mountingHoleDiameterTextBox, ParameterName.MountingHoleRadius },
                 { holeHeightTextBox, ParameterName.HoleHeight },
                 { sideWallHeightTextBox, ParameterName.SideWallHeight }
             };
@@ -66,7 +67,7 @@ namespace BracketUI
                     }
                     break;
 
-                case ParameterName.MountingHoleDiameter:
+                case ParameterName.MountingHoleRadius:
                     {
                         control = minMaxMountingHoleDiameterLabel;
                     }
@@ -93,12 +94,15 @@ namespace BracketUI
                 $"to {_parameters[parameterName].Max} mm";
         }
 
-        private void ShowMessage(string message, object sender, MessageLevel level)
+        private void ShowMessage(string message, MessageLevel level, object sender = null)
         {
             MessageBox.Show(message + "!", level.ToString(), MessageBoxButtons.OK, 
                 level == MessageLevel.Error ? MessageBoxIcon.Error : 
                 level == MessageLevel.Warning ? MessageBoxIcon.Warning : MessageBoxIcon.Information);
-            ((Control)sender).Focus();
+            if (sender != null)
+            {
+                ((Control)sender).Focus();
+            }
         }
 
         private void ChangeParameter(object sender)
@@ -118,7 +122,7 @@ namespace BracketUI
                         ChangeLabel(ParameterName.PlateWidth);
                     }
                     break;
-                case ParameterName.MountingHoleDiameter:
+                case ParameterName.MountingHoleRadius:
                     {
                         ChangeLabel(ParameterName.HoleHeight);
                         ChangeLabel(ParameterName.SideWallHeight);
@@ -127,13 +131,13 @@ namespace BracketUI
                 case ParameterName.SideWallHeight:
                     {
                         ChangeLabel(ParameterName.HoleHeight);
-                        ChangeLabel(ParameterName.MountingHoleDiameter);
+                        ChangeLabel(ParameterName.MountingHoleRadius);
                     }
                     break;
                 case ParameterName.HoleHeight:
                     {
                         ChangeLabel(ParameterName.SideWallHeight);
-                        ChangeLabel(ParameterName.MountingHoleDiameter);
+                        ChangeLabel(ParameterName.MountingHoleRadius);
                     }
                     break;
             }
@@ -147,54 +151,17 @@ namespace BracketUI
             }
             catch (FormatException)
             {
-                ShowMessage("The entered is not a number", sender, MessageLevel.Warning);
+                ShowMessage("The entered is not a number", MessageLevel.Warning, sender);
             }
             catch (ArgumentException exception)
             {
-                ShowMessage(exception.Message, sender, MessageLevel.Warning);
+                ShowMessage(exception.Message, MessageLevel.Warning, sender);
             }
         }
         
         private void textBox_Click(object sender, EventArgs e)
         {
-            switch(_textBoxs[sender])
-            {
-                case ParameterName.PlateWidth:
-                    {
-                        pictureBox1.Image = Properties.Resources.PlateWidth;
-                    }
-                    break;
-
-                case ParameterName.PlateLength:
-                    {
-                        pictureBox1.Image = Properties.Resources.PlateLength;
-                    }
-                    break;
-
-                case ParameterName.OuterTubeDiameter:
-                    {
-                        pictureBox1.Image = Properties.Resources.OuterTubeDiameter;
-                    }
-                    break;
-
-                case ParameterName.MountingHoleDiameter:
-                    {
-                        pictureBox1.Image = Properties.Resources.MountingHoleDiameter;
-                    }
-                    break;
-
-                case ParameterName.HoleHeight:
-                    {
-                        pictureBox1.Image = Properties.Resources.HoleHeight;
-                    }
-                    break;
-
-                case ParameterName.SideWallHeight:
-                    {
-                        pictureBox1.Image = Properties.Resources.SideWallHeight;
-                    }
-                    break;
-            }
+           pictureBox1.Image = (Image)Properties.Resources.ResourceManager.GetObject(_textBoxs[sender].ToString());
         }
 
         private async void openDrawingButton_Click(object sender, EventArgs e)
@@ -225,20 +192,20 @@ namespace BracketUI
                     }
                 }
                 var bracketBuilder = new BracketBuilder();
-                ShowMessage("Model will now begin construction", sender, MessageLevel.Info);
+                Task.Run(() => ShowMessage("Model will now begin construction", MessageLevel.Info));
                 bracketBuilder.CreateModel(_parameters);
             }
             catch (FormatException)
             {
-                ShowMessage("The entered is not a number", sender, MessageLevel.Warning);
+                ShowMessage("The entered is not a number", MessageLevel.Warning, sender);
             }
             catch (ArgumentException exception)
             {
-                ShowMessage(exception.Message, sender, MessageLevel.Warning);
+                ShowMessage(exception.Message, MessageLevel.Warning, sender);
             }
             catch (COMException exception)
             {
-                ShowMessage(exception.Message, sender, MessageLevel.Error);
+                ShowMessage(exception.Message, MessageLevel.Error, sender);
             }
         }
     }

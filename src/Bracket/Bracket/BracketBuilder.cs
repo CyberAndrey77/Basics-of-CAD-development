@@ -60,9 +60,9 @@ namespace Bracket
                 parameters[ParameterName.PlaneThickness].Value);
 
 
-            _kompasApi.CreateCircle(x2 - (parameters[ParameterName.MountingHoleDiameter].Value / 2 + 5), 
+            _kompasApi.CreateCircle(x2 - (parameters[ParameterName.MountingHoleRadius].Value + 5), 
                 -parameters[ParameterName.HoleHeight].Value + parameters[ParameterName.PlaneThickness].Value, 
-                parameters[ParameterName.MountingHoleDiameter].Value / 2, Plane.planeXOZ);
+                parameters[ParameterName.MountingHoleRadius].Value, Plane.planeXOZ);
             _kompasApi.CutExtrudeCircle();
         }
     }
