@@ -68,25 +68,15 @@ namespace Bracket
 
         private void SetMaxMountingHoleRadius()
         {
-            double maxMountingHoleRadius;
-            if (_parameters[ParameterName.MountingHoleRadius].Value + 
-                _parameters[ParameterName.PlaneThickness].Value > _parameters[ParameterName.HoleHeight].Value)
-            {
-                maxMountingHoleRadius = _parameters[ParameterName.SideWallHeight].Value -
-                (_parameters[ParameterName.HoleHeight].Value - _parameters[ParameterName.PlaneThickness].Value) -
-                _parameters[ParameterName.DistanceFromWall].Value;
-            }
-            else
-            {
-                maxMountingHoleRadius = _parameters[ParameterName.SideWallHeight].Value -
-                _parameters[ParameterName.HoleHeight].Value -
-                _parameters[ParameterName.DistanceFromWall].Value;
-            }
+            double bottomDistance = _parameters[ParameterName.HoleHeight].Value - 
+                _parameters[ParameterName.PlaneThickness].Value;
+            double topDistance = _parameters[ParameterName.SideWallHeight].Value - 
+                _parameters[ParameterName.DistanceFromWall].Value - _parameters[ParameterName.HoleHeight].Value;
 
-            maxMountingHoleRadius = maxMountingHoleRadius > MAX_MOUNTING_HOLE_RADIUS ? 
-                MAX_MOUNTING_HOLE_RADIUS : maxMountingHoleRadius;
+            double distance = bottomDistance < topDistance ? bottomDistance : topDistance;
 
-            _parameters[ParameterName.MountingHoleRadius].Max = maxMountingHoleRadius;
+            _parameters[ParameterName.MountingHoleRadius].Max = distance > MAX_MOUNTING_HOLE_RADIUS ?
+                MAX_MOUNTING_HOLE_RADIUS : distance;
         }
 
         private void SetMinSideWallHeight()
