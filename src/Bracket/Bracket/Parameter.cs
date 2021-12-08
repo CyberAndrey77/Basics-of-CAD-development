@@ -2,6 +2,7 @@
 
 namespace Bracket
 {
+    //TODO: XML?
     public class Parameter : IEquatable<Parameter>
     {
         private double _value;

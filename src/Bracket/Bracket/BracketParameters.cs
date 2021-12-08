@@ -68,6 +68,7 @@ namespace Bracket
 
         private void SetMaxMountingHoleRadius()
         {
+            //TODO: RSDN
             double bottomDistance = _parameters[ParameterName.HoleHeight].Value - 
                 _parameters[ParameterName.PlaneThickness].Value;
             double topDistance = _parameters[ParameterName.SideWallHeight].Value - 
@@ -81,16 +82,21 @@ namespace Bracket
 
         private void SetMinSideWallHeight()
         {
-            var minSideWallHeight = _parameters[ParameterName.HoleHeight].Value + 
-                _parameters[ParameterName.MountingHoleRadius].Value + _parameters[ParameterName.DistanceFromWall].Value;
+            //TODO: RSDN
+            var minSideWallHeight = _parameters[ParameterName.HoleHeight].Value 
+                                    + _parameters[ParameterName.MountingHoleRadius].Value 
+                                    + _parameters[ParameterName.DistanceFromWall].Value;
 
-            minSideWallHeight = minSideWallHeight < MIN_SIDE_WALL_HEIGHT ? MIN_SIDE_WALL_HEIGHT : minSideWallHeight;
+            minSideWallHeight = minSideWallHeight < MIN_SIDE_WALL_HEIGHT 
+                ? MIN_SIDE_WALL_HEIGHT 
+                : minSideWallHeight;
 
             _parameters[ParameterName.SideWallHeight].Min = minSideWallHeight;
         }
 
         private void SetMaxHoleHeight()
         {
+            //TODO: RSDN
             var maxHoleHeight = _parameters[ParameterName.SideWallHeight].Value - 
                 _parameters[ParameterName.DistanceFromWall].Value - _parameters[ParameterName.MountingHoleRadius].Value;
 
@@ -126,7 +132,11 @@ namespace Bracket
         {
             _parameters = new Dictionary<ParameterName, Parameter>()
             {
-                {ParameterName.PlateWidth, new Parameter(80, 70, 100, ParameterName.PlateWidth) },
+                //TODO: RSDN
+                {
+                    ParameterName.PlateWidth, 
+                    new Parameter(80, 70, 100, ParameterName.PlateWidth)
+                },
                 {ParameterName.PlateLength, new Parameter(120, 100, 130, ParameterName.PlateLength) },
                 {ParameterName.OuterTubeDiameter, new Parameter(60, 50, 70, ParameterName.OuterTubeDiameter) },
                 {ParameterName.MountingHoleRadius, new Parameter(5, 2.5, 6, ParameterName.MountingHoleRadius) },

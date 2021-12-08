@@ -116,6 +116,8 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMinSideWallHeight = 25;
+
+            //TODO: Дубли убрать.
             Dictionary<ParameterName, Parameter> parameters = new Dictionary<ParameterName, Parameter>
             {
                 {ParameterName.MountingHoleRadius, new Parameter(5, 2.5, 6, ParameterName.MountingHoleRadius) },

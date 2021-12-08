@@ -35,6 +35,7 @@ namespace Bracket
 
         private void CreateTube(BracketParameters parameters)
         {
+            //TODO: RSDN
             _kompasApi.CreateCircle(0, 0, parameters[ParameterName.OuterTubeDiameter].Value / 2, Plane.planeXOY);
             _kompasApi.ExtrudeCircle(parameters[ParameterName.TubeHeight].Value, true, 
                 parameters[ParameterName.TubeWallThickness].Value);

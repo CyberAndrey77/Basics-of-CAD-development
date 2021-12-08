@@ -11,8 +11,10 @@ namespace BracketUI
 {
     public partial class MainForm : Form
     {
-        private BracketParameters _parameters;
-        private Dictionary<object, ParameterName> _textBoxs;
+        private readonly BracketParameters _parameters;
+
+        private readonly Dictionary<object, ParameterName> _textBoxs;
+
         public MainForm()
         {
             InitializeComponent();
@@ -46,6 +48,7 @@ namespace BracketUI
 
         private void ChangeLabel(ParameterName parameterName)
         {
+            //TODO: https://stackoverflow.com/questions/2444033/get-dictionary-key-by-value
             Control control;
             switch (parameterName)
             {
@@ -96,9 +99,15 @@ namespace BracketUI
 
         private void ShowMessage(string message, MessageLevel level, object sender = null)
         {
-            MessageBox.Show(message + "!", level.ToString(), MessageBoxButtons.OK, 
-                level == MessageLevel.Error ? MessageBoxIcon.Error : 
-                level == MessageLevel.Warning ? MessageBoxIcon.Warning : MessageBoxIcon.Information);
+            //TODO: дописать.
+            var messageBoxItemDictionary = new Dictionary<MessageLevel, MessageBoxIcon>()
+            {
+                { MessageLevel.Error, MessageBoxIcon.Error }
+            };
+
+            MessageBox.Show(message + "!", level.ToString(), MessageBoxButtons.OK,
+                messageBoxItemDictionary[level]);
+
             if (sender != null)
             {
                 ((Control)sender).Focus();
@@ -109,6 +118,7 @@ namespace BracketUI
         {
             ((TextBox)sender).Text = ((TextBox)sender).Text.Replace('.', ',');
             _parameters.SetParameter(_textBoxs[sender], double.Parse(((TextBox)sender).Text));
+
             switch (_textBoxs[sender])
             {
                 case ParameterName.PlateWidth:

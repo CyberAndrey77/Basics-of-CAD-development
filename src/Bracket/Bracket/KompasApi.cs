@@ -69,7 +69,8 @@ namespace Bracket
 
         public void CreateRegtangle(double x1, double y1, double x2, double y2)
         {
-            _currentPlan = (ksEntity)_part.GetDefaultEntity((short)Obj3dType.o3d_planeXOY); // 1-интерфейс на плоскость XOY
+            // 1-интерфейс на плоскость XOY
+            _currentPlan = (ksEntity)_part.GetDefaultEntity((short)Obj3dType.o3d_planeXOY); 
             _sketch = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_sketch);
             _sketchDefinition = (ksSketchDefinition)_sketch.GetDefinition();
             _sketchDefinition.SetPlane(_currentPlan);

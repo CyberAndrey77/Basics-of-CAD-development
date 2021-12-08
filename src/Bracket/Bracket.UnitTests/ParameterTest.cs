@@ -6,6 +6,7 @@ namespace Bracket.UnitTests
     [TestFixture]
     class ParameterTest
     {
+        //TODO: Много дублей!
         [TestCase(TestName = "Проверка корректное создания объекта Параметр при помощи конструктора")]
         public void Constructor_ResultCorrectConstructorInit()
         {
