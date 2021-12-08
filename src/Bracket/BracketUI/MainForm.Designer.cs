@@ -104,9 +104,9 @@ namespace BracketUI
             this.outerTubeDiameterLabel.AutoSize = true;
             this.outerTubeDiameterLabel.Location = new System.Drawing.Point(12, 97);
             this.outerTubeDiameterLabel.Name = "outerTubeDiameterLabel";
-            this.outerTubeDiameterLabel.Size = new System.Drawing.Size(165, 17);
+            this.outerTubeDiameterLabel.Size = new System.Drawing.Size(152, 17);
             this.outerTubeDiameterLabel.TabIndex = 5;
-            this.outerTubeDiameterLabel.Text = "Outer Tube Radius (C)";
+            this.outerTubeDiameterLabel.Text = "Outer Tube Diameter (C)";
             // 
             // mountingHoleDiameterLabel
             // 
@@ -115,7 +115,7 @@ namespace BracketUI
             this.mountingHoleDiameterLabel.Name = "mountingHoleDiameterLabel";
             this.mountingHoleDiameterLabel.Size = new System.Drawing.Size(183, 17);
             this.mountingHoleDiameterLabel.TabIndex = 6;
-            this.mountingHoleDiameterLabel.Text = "Mounting Hole Diameter (E)";
+            this.mountingHoleDiameterLabel.Text = "Mounting Hole Radius (E)";
             // 
             // mountingHoleDiameterTextBox
             // 

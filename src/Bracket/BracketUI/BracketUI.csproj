@@ -131,5 +131,11 @@
   <ItemGroup>
     <None Include="img\BracketDrawing.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="img\MountingHoleRadius.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\Деталь.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
