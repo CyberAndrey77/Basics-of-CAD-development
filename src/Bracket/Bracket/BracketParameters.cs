@@ -4,14 +4,30 @@ namespace Bracket
 {
     public class BracketParameters
     {
+        /// <summary>
+        /// Минимальное значение у высоты стенки.
+        /// </summary>
         private const double MIN_SIDE_WALL_HEIGHT = 20;
+
+        /// <summary>
+        /// Максимальное значение у высоты отверстия.
+        /// </summary>
         private const double MAX_HOLE_HEIGHT = 15;
+
+        /// <summary>
+        /// Минимальное значение у высоты отверстия.
+        /// </summary>
         private const double MIN_HOLE_HEIGHT = 7;
+
+        /// <summary>
+        /// Максимальное значение у радиуса крепежного отверстия.
+        /// </summary>
         private const double MAX_MOUNTING_HOLE_RADIUS = 6;
+
         /// <summary>
         /// Словарь содержит параметры кронштейна.
         /// </summary>
-        private Dictionary<ParameterName, Parameter> _parameters;
+        private readonly Dictionary<ParameterName, Parameter> _parameters;
 
         /// <summary>
         /// Задает значение параметра и изменяет минимальные и максимальные значения у зависимых параметров.
@@ -66,23 +82,32 @@ namespace Bracket
             }
         }
 
+        /// <summary>
+        /// Установка максимального значения у радиуса крепежного отверстия.
+        /// </summary>
         private void SetMaxMountingHoleRadius()
         {
-            //TODO: RSDN
-            double bottomDistance = _parameters[ParameterName.HoleHeight].Value - 
-                _parameters[ParameterName.PlaneThickness].Value;
-            double topDistance = _parameters[ParameterName.SideWallHeight].Value - 
-                _parameters[ParameterName.DistanceFromWall].Value - _parameters[ParameterName.HoleHeight].Value;
+            double bottomDistance = _parameters[ParameterName.HoleHeight].Value 
+                                    - _parameters[ParameterName.PlaneThickness].Value;
 
-            double distance = bottomDistance < topDistance ? bottomDistance : topDistance;
+            double topDistance = _parameters[ParameterName.SideWallHeight].Value 
+                                - _parameters[ParameterName.DistanceFromWall].Value 
+                                - _parameters[ParameterName.HoleHeight].Value;
 
-            _parameters[ParameterName.MountingHoleRadius].Max = distance > MAX_MOUNTING_HOLE_RADIUS ?
-                MAX_MOUNTING_HOLE_RADIUS : distance;
+            double distance = bottomDistance < topDistance 
+                            ? bottomDistance 
+                            : topDistance;
+
+            _parameters[ParameterName.MountingHoleRadius].Max = distance > MAX_MOUNTING_HOLE_RADIUS 
+                                                                ? MAX_MOUNTING_HOLE_RADIUS 
+                                                                : distance;
         }
 
+        /// <summary>
+        /// Установка минимального значения у высоты стенки.
+        /// </summary>
         private void SetMinSideWallHeight()
         {
-            //TODO: RSDN
             var minSideWallHeight = _parameters[ParameterName.HoleHeight].Value 
                                     + _parameters[ParameterName.MountingHoleRadius].Value 
                                     + _parameters[ParameterName.DistanceFromWall].Value;
@@ -94,23 +119,33 @@ namespace Bracket
             _parameters[ParameterName.SideWallHeight].Min = minSideWallHeight;
         }
 
+        /// <summary>
+        /// Установка максимального значения у высоты отверстия.
+        /// </summary>
         private void SetMaxHoleHeight()
         {
-            //TODO: RSDN
-            var maxHoleHeight = _parameters[ParameterName.SideWallHeight].Value - 
-                _parameters[ParameterName.DistanceFromWall].Value - _parameters[ParameterName.MountingHoleRadius].Value;
+            var maxHoleHeight = _parameters[ParameterName.SideWallHeight].Value 
+                                - _parameters[ParameterName.DistanceFromWall].Value 
+                                - _parameters[ParameterName.MountingHoleRadius].Value;
 
-            maxHoleHeight = maxHoleHeight < MAX_HOLE_HEIGHT ? maxHoleHeight : MAX_HOLE_HEIGHT;
+            maxHoleHeight = maxHoleHeight < MAX_HOLE_HEIGHT 
+                            ? maxHoleHeight 
+                            : MAX_HOLE_HEIGHT;
 
             _parameters[ParameterName.HoleHeight].Max = maxHoleHeight;
         }
 
+        /// <summary>
+        /// Установка минимального значения у высоты отверстия.
+        /// </summary>
         private void SetMinHoleHeight()
         {
-            var minHoleHeight = _parameters[ParameterName.MountingHoleRadius].Value + 
-                _parameters[ParameterName.PlaneThickness].Value;
+            var minHoleHeight = _parameters[ParameterName.MountingHoleRadius].Value 
+                                + _parameters[ParameterName.PlaneThickness].Value;
 
-            minHoleHeight = minHoleHeight < MIN_HOLE_HEIGHT ? MIN_HOLE_HEIGHT : minHoleHeight;
+            minHoleHeight = minHoleHeight < MIN_HOLE_HEIGHT 
+                            ? MIN_HOLE_HEIGHT 
+                            : minHoleHeight;
 
             _parameters[ParameterName.HoleHeight].Min = minHoleHeight;
         }
@@ -137,15 +172,42 @@ namespace Bracket
                     ParameterName.PlateWidth, 
                     new Parameter(80, 70, 100, ParameterName.PlateWidth)
                 },
-                {ParameterName.PlateLength, new Parameter(120, 100, 130, ParameterName.PlateLength) },
-                {ParameterName.OuterTubeDiameter, new Parameter(60, 50, 70, ParameterName.OuterTubeDiameter) },
-                {ParameterName.MountingHoleRadius, new Parameter(5, 2.5, 6, ParameterName.MountingHoleRadius) },
-                {ParameterName.HoleHeight, new Parameter(10, 8, 15, ParameterName.HoleHeight) },
-                {ParameterName.SideWallHeight, new Parameter(25, 20, 30, ParameterName.SideWallHeight) },
-                {ParameterName.PlaneThickness, new Parameter(3, 3, 3, ParameterName.PlaneThickness) },
-                {ParameterName.TubeHeight, new Parameter(81, 81, 81, ParameterName.TubeHeight) },
-                {ParameterName.TubeWallThickness, new Parameter(5, 5, 5, ParameterName.TubeWallThickness) },
-                {ParameterName.DistanceFromWall, new Parameter(5, 5, 5, ParameterName.DistanceFromWall) }
+                {
+                    ParameterName.PlateLength,
+                    new Parameter(120, 100, 130, ParameterName.PlateLength) 
+                },
+                {
+                    ParameterName.OuterTubeDiameter, 
+                    new Parameter(60, 50, 70, ParameterName.OuterTubeDiameter) 
+                },
+                {
+                    ParameterName.MountingHoleRadius, 
+                    new Parameter(5, 2.5, 6, ParameterName.MountingHoleRadius) 
+                },
+                {
+                    ParameterName.HoleHeight, 
+                    new Parameter(10, 8, 15, ParameterName.HoleHeight) 
+                },
+                {
+                    ParameterName.SideWallHeight, 
+                    new Parameter(25, 20, 30, ParameterName.SideWallHeight)
+                },
+                {
+                    ParameterName.PlaneThickness, 
+                    new Parameter(3, 3, 3, ParameterName.PlaneThickness)
+                },
+                {
+                    ParameterName.TubeHeight, 
+                    new Parameter(81, 81, 81, ParameterName.TubeHeight) 
+                },
+                {
+                    ParameterName.TubeWallThickness, 
+                    new Parameter(5, 5, 5, ParameterName.TubeWallThickness) 
+                },
+                {
+                    ParameterName.DistanceFromWall, 
+                    new Parameter(5, 5, 5, ParameterName.DistanceFromWall) 
+                }
             };
         }
 

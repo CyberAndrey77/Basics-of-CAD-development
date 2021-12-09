@@ -2,14 +2,35 @@
 
 namespace Bracket
 {
-    //TODO: XML?
+    /// <summary>
+    /// Класс параметров.
+    /// </summary>
     public class Parameter : IEquatable<Parameter>
     {
+        /// <summary>
+        /// Поле текущего значения.
+        /// </summary>
         private double _value;
+        /// <summary>
+        /// Поле максимального значения.
+        /// </summary>
         private double _max;
+        /// <summary>
+        /// Поле минимального значения.
+        /// </summary>
         private double _min;
+        /// <summary>
+        /// Имя параметра.
+        /// </summary>
         private ParameterName _name;
+        /// <summary>
+        /// Имя параметра в виде строки.
+        /// </summary>
         private string _parameterName;
+
+        /// <summary>
+        /// Максимальное значение.
+        /// </summary>
         public double Max
         {
             get => _max;
@@ -26,6 +47,10 @@ namespace Bracket
                 _max = value;
             }
         }
+
+        /// <summary>
+        /// Минимальное значение.
+        /// </summary>
         public double Min
         {
             get => _min;
@@ -38,6 +63,9 @@ namespace Bracket
                 _min = value;
             }
         }
+        /// <summary>
+        /// Текущее значение.
+        /// </summary>
         public double Value
         {
             get => _value;
@@ -51,6 +79,9 @@ namespace Bracket
                 _value = value;
             }
         }
+        /// <summary>
+        /// Имя параметра.
+        /// </summary>
         public ParameterName Name
         {
             get => _name;
@@ -61,8 +92,18 @@ namespace Bracket
             }
         }
 
+        /// <summary>
+        /// Имя параметра в виде строки.
+        /// </summary>
         public string ParameterName { get => _parameterName; }
 
+        /// <summary>
+        /// Конструктор параметра.
+        /// </summary>
+        /// <param name="value">Значение</param>
+        /// <param name="min">Минимальное значение</param>
+        /// <param name="max">Максимальное значение</param>
+        /// <param name="name">Имя параметра</param>
         public Parameter(double value, double min, double max, ParameterName name)
         {
             Min = min;
@@ -71,10 +112,18 @@ namespace Bracket
             Value = value;
         }
 
+        /// <summary>
+        /// Конструктор для Юнит-тестов.
+        /// </summary>
         public Parameter()
         {
         }
 
+        /// <summary>
+        /// Сравнение двух параметров.
+        /// </summary>
+        /// <param name="other">Сравниваемый параметр</param>
+        /// <returns></returns>
         public bool Equals(Parameter other)
         {
             return _max == other._max

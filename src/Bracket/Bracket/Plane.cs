@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Bracket
+﻿namespace Bracket
 {
     public enum Plane
     {
-        //TODO:RSDN
-        planeXOY = 1,
-        planeXOZ = 2,
-        planeYOZ = 3,
+        PlaneXOY = 1,
+        PlaneXOZ = 2,
+        PlaneYOZ = 3,
     }
 }

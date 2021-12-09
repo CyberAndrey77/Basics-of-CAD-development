@@ -11,8 +11,14 @@ namespace BracketUI
 {
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Поле параметров.
+        /// </summary>
         private readonly BracketParameters _parameters;
 
+        /// <summary>
+        /// Словарь с TextBoxs.
+        /// </summary>
         private readonly Dictionary<object, ParameterName> _textBoxs;
 
         public MainForm()
@@ -30,12 +36,11 @@ namespace BracketUI
             };
 
             _parameters = new BracketParameters();
-            foreach (Control textBox in Controls)
+
+            foreach (var keyValuePair in _textBoxs)
             {
-                if (textBox is TextBox)
-                {
-                    textBox.Text = _parameters[_textBoxs[textBox]].Value.ToString();
-                }
+                TextBox textBox = (TextBox)keyValuePair.Key;
+                textBox.Text = _parameters[_textBoxs[textBox]].Value.ToString();
             }
 
             foreach (var textBox in _textBoxs)
@@ -46,9 +51,12 @@ namespace BracketUI
             pictureBox1.Image = Properties.Resources.PlateWidth;
         }
 
+        /// <summary>
+        /// Изменение label с максимальными и минимальными параметрами.
+        /// </summary>
+        /// <param name="parameterName">Имя параметра</param>
         private void ChangeLabel(ParameterName parameterName)
         {
-            //TODO: https://stackoverflow.com/questions/2444033/get-dictionary-key-by-value
             Control control;
             switch (parameterName)
             {
@@ -97,12 +105,19 @@ namespace BracketUI
                 $"to {_parameters[parameterName].Max} mm";
         }
 
+        /// <summary>
+        /// Показывает сообщение пользователю.
+        /// </summary>
+        /// <param name="message">Сообщение</param>
+        /// <param name="level">Уровень сообщения</param>
+        /// <param name="sender">Объект, который вызвал метод</param>
         private void ShowMessage(string message, MessageLevel level, object sender = null)
         {
-            //TODO: дописать.
             var messageBoxItemDictionary = new Dictionary<MessageLevel, MessageBoxIcon>()
             {
-                { MessageLevel.Error, MessageBoxIcon.Error }
+                { MessageLevel.Error, MessageBoxIcon.Error },
+                { MessageLevel.Warning, MessageBoxIcon.Warning },
+                {MessageLevel.Info, MessageBoxIcon.Information }
             };
 
             MessageBox.Show(message + "!", level.ToString(), MessageBoxButtons.OK,
@@ -114,6 +129,11 @@ namespace BracketUI
             }
         }
 
+        /// <summary>
+        /// Смена текущего значения у параметра.
+        /// Также меняет максимальные и минимальные значения у зависимых параметров.
+        /// </summary>
+        /// <param name="sender">Объект, который вызвал метод</param>
         private void ChangeParameter(object sender)
         {
             ((TextBox)sender).Text = ((TextBox)sender).Text.Replace('.', ',');
@@ -194,14 +214,12 @@ namespace BracketUI
         {
             try
             {
-                foreach (Control textBox in Controls)
+                foreach (var keyValuePair in _textBoxs)
                 {
-                    if (textBox is TextBox)
-                    {
-                         ChangeParameter(textBox);   
-                    }
+                    ChangeParameter((TextBox)keyValuePair.Key);
                 }
                 var bracketBuilder = new BracketBuilder();
+
                 Task.Run(() => ShowMessage("Model will now begin construction", MessageLevel.Info));
                 bracketBuilder.CreateModel(_parameters);
             }

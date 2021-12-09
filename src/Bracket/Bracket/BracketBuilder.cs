@@ -36,7 +36,7 @@ namespace Bracket
         private void CreateTube(BracketParameters parameters)
         {
             //TODO: RSDN
-            _kompasApi.CreateCircle(0, 0, parameters[ParameterName.OuterTubeDiameter].Value / 2, Plane.planeXOY);
+            _kompasApi.CreateCircle(0, 0, parameters[ParameterName.OuterTubeDiameter].Value / 2, Plane.PlaneXOY);
             _kompasApi.ExtrudeCircle(parameters[ParameterName.TubeHeight].Value, true, 
                 parameters[ParameterName.TubeWallThickness].Value);
         }
@@ -63,7 +63,7 @@ namespace Bracket
 
             _kompasApi.CreateCircle(x2 - (parameters[ParameterName.MountingHoleRadius].Value + 5), 
                 -parameters[ParameterName.HoleHeight].Value + parameters[ParameterName.PlaneThickness].Value, 
-                parameters[ParameterName.MountingHoleRadius].Value, Plane.planeXOZ);
+                parameters[ParameterName.MountingHoleRadius].Value, Plane.PlaneXOZ);
             _kompasApi.CutExtrudeCircle();
         }
     }

@@ -12,13 +12,45 @@ namespace Bracket
 {
     class KompasApi
     {
+        /// <summary>
+        /// Поле 3D документа.
+        /// </summary>
         private ksDocument3D _document3D;
+
+        /// <summary>
+        /// Поле 2D документа.
+        /// </summary>
         private ksDocument2D _document2D;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private ksPart _part;
+
+        /// <summary>
+        /// Поле с текущим эскизом.
+        /// </summary>
         private ksEntity _sketch;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private ksSketchDefinition _sketchDefinition;
+
+        /// <summary>
+        /// Поле текущего плана.
+        /// </summary>
         private ksEntity _currentPlan;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public KompasObject Kompas { get; }
+
+        /// <summary>
+        /// Открытие Компас
+        /// </summary>
+        /// <returns>Возвращает указатель на Компас</returns>
         private KompasObject OpenKompas()
         {
             if (!GetActiveKompass(out var kompas))
@@ -31,6 +63,11 @@ namespace Bracket
             return kompas;
         }
 
+        /// <summary>
+        /// Получение открытого Компаса.
+        /// </summary>
+        /// <param name="kompasObject">Объект Компаса.</param>
+        /// <returns>Возвращает указатель на Компас</returns>
         private bool GetActiveKompass(out KompasObject kompasObject)
         {
             try
@@ -45,6 +82,11 @@ namespace Bracket
             }
         }
 
+        /// <summary>
+        /// Открытие Компас.
+        /// </summary>
+        /// <param name="kompasObject">Объект Компас</param>
+        /// <returns>Возвращает указатель на Компас</returns>
         private bool CreateActiveKompas(out KompasObject kompasObject)
         {
             try
@@ -59,6 +101,9 @@ namespace Bracket
             }
         }
 
+        /// <summary>
+        /// Создание локумента.
+        /// </summary>
         private void CreateDocument()
         {
             _document3D = (ksDocument3D)Kompas.Document3D();
@@ -67,6 +112,13 @@ namespace Bracket
             _part = (ksPart)_document3D.GetPart((int)Part_Type.pTop_Part); // новый компонент
         }
 
+        /// <summary>
+        /// Создание прямоугольника.
+        /// </summary>
+        /// <param name="x1">Координата X1</param>
+        /// <param name="y1">Координата Y1</param>
+        /// <param name="x2">Координата X2</param>
+        /// <param name="y2">Координата Y2</param>
         public void CreateRegtangle(double x1, double y1, double x2, double y2)
         {
             // 1-интерфейс на плоскость XOY
@@ -86,6 +138,10 @@ namespace Bracket
             _sketchDefinition.EndEdit();
         }
 
+        /// <summary>
+        /// Выдавливание прямоугольника.
+        /// </summary>
+        /// <param name="depth">Глубина выдавливания</param>
         public void ExtrudeRegtangle(double depth)
         {
             var entityExtrude = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
@@ -106,10 +162,10 @@ namespace Bracket
         /// <summary>
         /// Создание эскиза окружности.
         /// </summary>
-        /// <param name="xCenter">задает центр окружности по X</param>
-        /// <param name="yCenter">задает центр окружности по Y</param>
-        /// <param name="radius">задает радиус окружности</param>
-        /// <param name="plane">задает плоскость для эскиза</param>
+        /// <param name="xCenter">Задает центр окружности по X</param>
+        /// <param name="yCenter">Задает центр окружности по Y</param>
+        /// <param name="radius">Задает радиус окружности</param>
+        /// <param name="plane">Задает плоскость для эскиза</param>
         public void CreateCircle(double xCenter, double yCenter, double radius, Plane plane)
         {
             _currentPlan = (ksEntity)_part.GetDefaultEntity((short)(Obj3dType)plane);
@@ -125,11 +181,11 @@ namespace Bracket
         }
 
         /// <summary>
-        /// Выдавливание окружности
+        /// Выдавливание окружности.
         /// </summary>
-        /// <param name="depth">насколько выдавить окружность</param>
-        /// <param name="thin">нужны ли стенки</param>
-        /// <param name="wallThikness">толщина стенок</param>
+        /// <param name="depth">Глубина выдавливания</param>
+        /// <param name="thin">Нужны ли стенки</param>
+        /// <param name="wallThikness">Толщина стенок</param>
         public void ExtrudeCircle(double depth, bool thin, double wallThikness = 0)
         {
             var entityExtrude = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
@@ -157,6 +213,9 @@ namespace Bracket
             entityExtrude.Create();
         }
 
+        /// <summary>
+        /// Вырезание окружности в объекте.
+        /// </summary>
         public void CutExtrudeCircle()
         {
             var entityExtrude = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_cutExtrusion);
@@ -173,6 +232,9 @@ namespace Bracket
             entityExtrude.Create();
         }
 
+        /// <summary>
+        /// Конструктор.
+        /// </summary>
         public KompasApi()
         {
             Kompas = OpenKompas();
