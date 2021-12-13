@@ -12,7 +12,7 @@ namespace Bracket.UnitTests
     public class BracketParametersTest
     {
         //TODO
-        private readonly Dictionary<ParameterName, Parameter> _parameters1 = 
+        private readonly Dictionary<ParameterName, Parameter> _threeParameters = 
             new Dictionary<ParameterName, Parameter>
         {
             {
@@ -30,7 +30,7 @@ namespace Bracket.UnitTests
         };
 
         //TODO
-        private readonly Dictionary<ParameterName, Parameter> _parameters2 = 
+        private readonly Dictionary<ParameterName, Parameter> _fiveParameters = 
             new Dictionary<ParameterName, Parameter>
         {
             {
@@ -118,7 +118,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMinPlateWidth = 76;
-            Dictionary<ParameterName, Parameter> parameters = _parameters1;
+            Dictionary<ParameterName, Parameter> parameters = _threeParameters;
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -135,7 +135,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxOuterTubeDiameter = 64;
-            var bracketParameters = new BracketParameters(_parameters1);
+            var bracketParameters = new BracketParameters(_threeParameters);
 
             //Act
             //вводим минимальное значение для ширины пластины
@@ -153,7 +153,7 @@ namespace Bracket.UnitTests
             var expectedMinSideWallHeight = 25;
 
             //TODO: Дубли убрать.
-            Dictionary<ParameterName, Parameter> parameters = _parameters2;
+            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -170,7 +170,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMinSideWallHeight = 21;
-            Dictionary<ParameterName, Parameter> parameters = _parameters2;
+            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -188,7 +188,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMinSideWallHeight = 26;
-            Dictionary<ParameterName, Parameter> parameters = _parameters2;
+            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -207,7 +207,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxHoleHeight = 10;
-            Dictionary<ParameterName, Parameter> parameters = _parameters2;
+            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -219,40 +219,25 @@ namespace Bracket.UnitTests
             Assert.AreEqual(expectedMaxHoleHeight, actualMaxHoleHeight);
         }
 
-        [TestCase(TestName = "Изменение минимума параметра HoleHeight путем " +
+        [TestCase(9, 6, TestName = "Изменение минимума параметра HoleHeight путем " +
             "изменения MountingHoleRadius на максимальное значение")]
-        public void ChangeMinHoleHeight_SetMaxMountingHoleRadius_ResultCorrect()
-        {
-            //Arrange
-            var expectedMinHoleHeight = 9;
-            Dictionary<ParameterName, Parameter> parameters = _parameters2;
-            var bracketParameters = new BracketParameters(parameters);
-
-            //Act
-            //вводим максимальное значение для радиуса отверстия
-            bracketParameters.SetParameter(ParameterName.MountingHoleRadius, 6);
-            var actualMinHoleHeight = bracketParameters[ParameterName.HoleHeight].Min;
-
-            //Assert
-            Assert.AreEqual(expectedMinHoleHeight, actualMinHoleHeight);
-        }
-
-        [TestCase(TestName = "Изменение минимума параметра HoleHeight путем " +
+        [TestCase(7, 2.5, TestName = "Изменение минимума параметра HoleHeight путем " +
             "изменения MountingHoleRadius на минимальное значение")]
-        public void ChangeMinHoleHeight_SetMinMountingHoleRadius_ResultCorrect()
+        public void ChangeMinHoleHeight_SetMountingHoleRadius_ResultCorrect(double holeHeight, 
+            double mountingHoleRadius)
         {
             //Arrange
-            var expectedMinHoleHeight = 7;
-            Dictionary<ParameterName, Parameter> parameters = _parameters2;
+            var expectedHoleHeight = holeHeight;
+            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
             //вводим минимальное значение для радиуса отверстия
-            bracketParameters.SetParameter(ParameterName.MountingHoleRadius, 2.5);
-            var actualMinHoleHeight = bracketParameters[ParameterName.HoleHeight].Min;
+            bracketParameters.SetParameter(ParameterName.MountingHoleRadius, mountingHoleRadius);
+            var actualHoleHeight = bracketParameters[ParameterName.HoleHeight].Min;
 
             //Assert
-            Assert.AreEqual(expectedMinHoleHeight, actualMinHoleHeight);
+            Assert.AreEqual(expectedHoleHeight, actualHoleHeight);
         }
 
         [TestCase(TestName = "Изменение максимума параметра HoleHeight путем " +
@@ -261,7 +246,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxHoleHeight = 14;
-            Dictionary<ParameterName, Parameter> parameters = _parameters2;
+            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -273,41 +258,25 @@ namespace Bracket.UnitTests
             Assert.AreEqual(expectedMaxHoleHeight, actualMaxHoleHeight);
         }
 
-        [TestCase(TestName = "Изменение максимума параметра HoleHeight путем " +
+        [TestCase(12.5, 2.5, 20, TestName = "Изменение максимума параметра HoleHeight путем " +
             "изменения MountingHoleRadius на минимальное значение и изменение SideWallHeight на минимальное значение")]
-        public void ChangeMaxHoleHeight_SetMinMountingHoleRadiusAndMinSideWallHeight_ResultCorrect()
-        {
-            //Arrange
-            var expectedMaxHoleHeight = 12.5;
-            Dictionary<ParameterName, Parameter> parameters = _parameters2;
-            var bracketParameters = new BracketParameters(parameters);
-
-            //Act
-            //вводим минимальное значение для радиуса отверстия
-            bracketParameters.SetParameter(ParameterName.MountingHoleRadius, 2.5);
-            bracketParameters.SetParameter(ParameterName.SideWallHeight, 20);
-            var actualMaxHoleHeight = bracketParameters[ParameterName.HoleHeight].Max;
-
-            //Assert
-            Assert.AreEqual(expectedMaxHoleHeight, actualMaxHoleHeight);
-        }
-
-        [TestCase(TestName = "Изменение максимума параметра HoleHeight путем " +
+        [TestCase(10, 6, 21, TestName = "Изменение максимума параметра HoleHeight путем " +
             "изменения MountingHoleRadius на максимальное значение и изменение SideWallHeight на минимально значение")]
-        public void ChangeMaxHoleHeight_SetMaxMountingHoleRadiusAndMinSideWallHeight_ResultCorrect()
+        public void ChangeHoleHeight_SetMountingHoleRadiusAndSideWallHeight_ResultCorrect(double holeHeight,
+            double mountingHoleRadius, double sideWallHeight)
         {
             //Arrange
-            var expectedMaxHoleHeight = 10;
-            Dictionary<ParameterName, Parameter> parameters = _parameters2;
+            var expectedHoleHeight = holeHeight;
+            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
-            bracketParameters.SetParameter(ParameterName.MountingHoleRadius, 6);
-            bracketParameters.SetParameter(ParameterName.SideWallHeight, 21);
-            var actualMaxHoleHeight = bracketParameters[ParameterName.HoleHeight].Max;
+            bracketParameters.SetParameter(ParameterName.MountingHoleRadius, mountingHoleRadius);
+            bracketParameters.SetParameter(ParameterName.SideWallHeight, sideWallHeight);
+            var actualHoleHeight = bracketParameters[ParameterName.HoleHeight].Max;
 
             //Assert
-            Assert.AreEqual(expectedMaxHoleHeight, actualMaxHoleHeight);
+            Assert.AreEqual(expectedHoleHeight, actualHoleHeight);
         }
 
         [TestCase(TestName = "Изменение максимума параметра MountingHoleRadius путем " +
@@ -316,7 +285,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxMountingHoleRadius = 6;
-            Dictionary<ParameterName, Parameter> parameters = _parameters2;
+            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -334,7 +303,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxMountingHoleRadius = 4;
-            Dictionary<ParameterName, Parameter> parameters = _parameters2;
+            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
 
             //в этом месте нужно задать мин. радиус
             parameters[ParameterName.MountingHoleRadius].Value = 2.5;
@@ -355,7 +324,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxMountingHoleRadius = 5;
-            Dictionary<ParameterName, Parameter> parameters = _parameters2;
+            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -372,7 +341,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxMountingHoleRadius = 5;
-            Dictionary<ParameterName, Parameter> parameters = _parameters2;
+            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
             var bracketParameters = new BracketParameters(parameters);
 
             //Act

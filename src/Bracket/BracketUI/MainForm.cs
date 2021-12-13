@@ -24,9 +24,21 @@ namespace BracketUI
         /// </summary>
         private readonly Dictionary<object, ParameterName> _textBoxs;
 
+        private readonly Dictionary<ParameterName, Label> _labels;
+
         public MainForm()
         {
             InitializeComponent();
+
+            _labels = new Dictionary<ParameterName, Label>()
+            {
+                { ParameterName.PlateLength, minMaxPlateLengthLabel},
+                { ParameterName.PlateWidth, minMaxPlateWidthLabel},
+                { ParameterName.OuterTubeDiameter, minMaxOuterTubeDiameterLabel},
+                { ParameterName.MountingHoleRadius, minMaxMountingHoleDiameterLabel},
+                { ParameterName.HoleHeight, minMaxHoleHeightLabel},
+                { ParameterName.SideWallHeight, minMaxSideWallHeightLabel}
+            };
 
             _textBoxs = new Dictionary<object, ParameterName>
             {
@@ -60,54 +72,7 @@ namespace BracketUI
         /// <param name="parameterName">Имя параметра</param>
         private void ChangeLabel(ParameterName parameterName)
         {
-            var dictionary = new Dictionary<ParameterName, Label>()
-            {
-                { ParameterName.PlateWidth, minMaxPlateWidthLabel },
-            };
-            Control control;
-            switch (parameterName)
-            {
-                case ParameterName.PlateWidth:
-                    {
-                        control = minMaxPlateWidthLabel;
-                    }
-                    break;
-
-                case ParameterName.PlateLength:
-                    {
-                        control = minMaxPlateLengthLabel;
-                    }
-                    break;
-
-                case ParameterName.OuterTubeDiameter:
-                    {
-                        control = minMaxOuterTubeDiameterLabel;
-                    }
-                    break;
-
-                case ParameterName.MountingHoleRadius:
-                    {
-                        control = minMaxMountingHoleDiameterLabel;
-                    }
-                    break;
-
-                case ParameterName.HoleHeight:
-                    {
-                        control = minMaxHoleHeightLabel;
-                    }
-                    break;
-
-                case ParameterName.SideWallHeight:
-                    {
-                        control = minMaxSideWallHeightLabel;
-                    }
-                    break;
-                default:
-                    {
-                        control = minMaxPlateWidthLabel;
-                    }
-                    break;
-            }
+            Control control = _labels[parameterName];
             control.Text = $"from {_parameters[parameterName].Min} mm " +
                 $"to {_parameters[parameterName].Max} mm";
         }

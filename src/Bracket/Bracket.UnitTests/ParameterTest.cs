@@ -29,21 +29,6 @@ namespace Bracket.UnitTests
             });
         }
 
-        [TestCase(TestName = "Проверка геттера и сеттера у свойства Min на отрицательные значения")]
-        public void SetMin_MinLessZero_ArgumentException()
-        {
-            //Arrange
-            var expectedMin = -1.0;
-            var parameter = new Parameter();
-
-            //Assert
-            Assert.Throws<ArgumentException>(() =>
-            {
-                //Act
-                parameter.Min = expectedMin;
-            });
-        }
-
         [TestCase(TestName = "Проверка геттера и сеттера у свойства Min на внесение корректных значений")]
         public void SetCorrectMin_ResultCorrectSet()
         {
@@ -58,18 +43,19 @@ namespace Bracket.UnitTests
             Assert.AreEqual(expectedMin, parameter.Min);
         }
 
-        [TestCase(TestName = "Проверка геттера и сеттера у свойства Max на отрицательные значения")]
-        public void SetMAx_MAxLessZero_ArgumentException()
+        [TestCase(-1.0, TestName = "Проверка геттера и сеттера у свойства Min на отрицательные значения")]
+        [TestCase(-1.0, TestName = "Проверка геттера и сеттера у свойства Max на отрицательные значения")]
+        public void Set_LessZero_ArgumentException(double value)
         {
             //Arrange
-            var expectedMax = -1.0;
+            var expected = value;
             var parameter = new Parameter();
 
             //Assert
             Assert.Throws<ArgumentException>(() =>
             {
                 //Act
-                parameter.Max = expectedMax;
+                parameter.Max = expected;
             });
         }
 
@@ -93,12 +79,8 @@ namespace Bracket.UnitTests
         public void SetCorrectMax_ResultCorrectSet()
         {
             //Arrange
-            var expectedMin = 1.0;
             var expectedMax = 5.0;
-            var parameter = new Parameter()
-            {
-                Min = expectedMin
-            };
+            var parameter = new Parameter();
 
             //Act
             parameter.Max = expectedMax;
@@ -107,34 +89,14 @@ namespace Bracket.UnitTests
             Assert.AreEqual(expectedMax, parameter.Max);
         }
 
-        [TestCase(TestName = "Значение параметра меньше минимального порога")]
-        public void SetMinimumValue_ArgumentExcepton()
+        [TestCase(10.0, 20.0, 5.0, TestName = "Значение параметра меньше минимального порога")]
+        [TestCase(10.0, 20.0, 25.0, TestName = "Значение параметра больше максимального порога")]
+        public void SetValue_ArgumentExcepton(double min, double max, double value)
         {
             //Arrange
-            var expectedMin = 10.0;
-            var expectedMax = 20.0;
-            var expectedValue = 5.0;
-            var parameter = new Parameter()
-            {
-                Min = expectedMin,
-                Max = expectedMax
-            };
-
-            //Assert
-            Assert.Throws<ArgumentException>(() =>
-            {
-                //Act
-                parameter.Value = expectedValue;
-            });
-        }
-
-        [TestCase(TestName = "Значение параметра больше максимального порога")]
-        public void SetMaximumValue_ArgumentExcepton()
-        {
-            //Arrange
-            var expectedMin = 10.0;
-            var expectedMax = 20.0;
-            var expectedValue = 25.0;
+            var expectedMin = min;
+            var expectedMax = max;
+            var expectedValue = value;
             var parameter = new Parameter()
             {
                 Min = expectedMin,
