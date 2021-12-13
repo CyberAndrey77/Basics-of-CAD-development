@@ -11,7 +11,9 @@ namespace Bracket.UnitTests
     [TestFixture]
     public class BracketParametersTest
     {
-        private readonly Dictionary<ParameterName, Parameter> _parameters1 = new Dictionary<ParameterName, Parameter>
+        //TODO
+        private readonly Dictionary<ParameterName, Parameter> _parameters1 = 
+            new Dictionary<ParameterName, Parameter>
         {
             {
                 ParameterName.PlateWidth, 
@@ -27,7 +29,9 @@ namespace Bracket.UnitTests
             }
         };
 
-        private readonly Dictionary<ParameterName, Parameter> _parameters2 = new Dictionary<ParameterName, Parameter>
+        //TODO
+        private readonly Dictionary<ParameterName, Parameter> _parameters2 = 
+            new Dictionary<ParameterName, Parameter>
         {
             {
                 ParameterName.MountingHoleRadius, 
@@ -131,8 +135,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxOuterTubeDiameter = 64;
-            Dictionary<ParameterName, Parameter> parameters = _parameters1;
-            var bracketParameters = new BracketParameters(parameters);
+            var bracketParameters = new BracketParameters(_parameters1);
 
             //Act
             //вводим минимальное значение для ширины пластины

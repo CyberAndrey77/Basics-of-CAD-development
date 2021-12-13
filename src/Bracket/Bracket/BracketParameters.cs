@@ -158,10 +158,7 @@ namespace Bracket
         /// </summary>
         /// <param name="name">Имя параметра</param>
         /// <returns>Экземпляр класса Parameter</returns>
-        public Parameter this[ParameterName name]
-        {
-            get => _parameters[name];
-        }
+        public Parameter this[ParameterName name] => _parameters[name];
 
         /// <summary>
         /// Конструктор задающий дефолтные значения параметров кронштейна.
@@ -170,7 +167,6 @@ namespace Bracket
         {
             _parameters = new Dictionary<ParameterName, Parameter>()
             {
-                //TODO: RSDN
                 {
                     ParameterName.PlateWidth, 
                     new Parameter(80, 70, 100, ParameterName.PlateWidth)

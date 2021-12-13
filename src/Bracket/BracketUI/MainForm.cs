@@ -60,6 +60,10 @@ namespace BracketUI
         /// <param name="parameterName">Имя параметра</param>
         private void ChangeLabel(ParameterName parameterName)
         {
+            var dictionary = new Dictionary<ParameterName, Label>()
+            {
+                { ParameterName.PlateWidth, minMaxPlateWidthLabel },
+            };
             Control control;
             switch (parameterName)
             {
