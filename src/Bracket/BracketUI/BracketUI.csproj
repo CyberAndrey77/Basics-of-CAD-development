@@ -95,6 +95,10 @@
       <Project>{929f2c7d-78d5-4377-b72b-a34260832031}</Project>
       <Name>Bracket</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kompas\Kompas.csproj">
+      <Project>{ee9b468a-0846-4f3f-bb8f-08d7a36c9f96}</Project>
+      <Name>Kompas</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="stdole">
