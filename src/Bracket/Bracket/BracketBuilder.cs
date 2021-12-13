@@ -7,10 +7,20 @@ using System.Runtime.InteropServices;
 
 namespace Bracket
 {
+    /// <summary>
+    /// Класс для постройки модели.
+    /// </summary>
     public class BracketBuilder
     {
+        /// <summary>
+        /// Ссылка на Компас.
+        /// </summary>
         private KompasApi _kompasApi;
 
+        /// <summary>
+        /// Метод для построения модели.
+        /// </summary>
+        /// <param name="parameters">Параметры модели</param>
         public void CreateModel(BracketParameters parameters)
         {
             _kompasApi = new KompasApi();
@@ -22,6 +32,10 @@ namespace Bracket
 
         }
 
+        /// <summary>
+        /// Создание полки для модели.
+        /// </summary>
+        /// <param name="parameters">Параметры модели</param>
         private void CreatePlate(BracketParameters parameters)
         {
             var x1 = -parameters[ParameterName.PlateLength].Value / 2;
@@ -33,14 +47,23 @@ namespace Bracket
             _kompasApi.ExtrudeRegtangle(-parameters[ParameterName.PlaneThickness].Value);
         }
 
+        /// <summary>
+        /// Создание трубки у модели.
+        /// </summary>
+        /// <param name="parameters">Параметры модели</param>
         private void CreateTube(BracketParameters parameters)
         {
-            //TODO: RSDN
-            _kompasApi.CreateCircle(0, 0, parameters[ParameterName.OuterTubeDiameter].Value / 2, Plane.PlaneXOY);
+            _kompasApi.CreateCircle(0, 0, 
+                parameters[ParameterName.OuterTubeDiameter].Value / 2, Plane.PlaneXOY);
+
             _kompasApi.ExtrudeCircle(parameters[ParameterName.TubeHeight].Value, true, 
                 parameters[ParameterName.TubeWallThickness].Value);
         }
 
+        /// <summary>
+        /// Создание стенок модели.
+        /// </summary>
+        /// <param name="parameters">Параметры модели</param>
         private void CreateWalls(BracketParameters parameters)
         {
             var x1 = -parameters[ParameterName.PlateLength].Value / 2;

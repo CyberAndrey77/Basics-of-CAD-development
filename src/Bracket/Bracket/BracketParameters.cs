@@ -2,6 +2,9 @@
 
 namespace Bracket
 {
+    /// <summary>
+    /// СКласс параметров модели.
+    /// </summary>
     public class BracketParameters
     {
         /// <summary>

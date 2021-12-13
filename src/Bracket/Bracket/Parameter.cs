@@ -3,7 +3,7 @@
 namespace Bracket
 {
     /// <summary>
-    /// Класс параметров.
+    /// Класс параметр.
     /// </summary>
     public class Parameter : IEquatable<Parameter>
     {

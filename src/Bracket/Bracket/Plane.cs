@@ -1,5 +1,8 @@
 ﻿namespace Bracket
 {
+    /// <summary>
+    /// Перечисление осей в Компасе.
+    /// </summary>
     public enum Plane
     {
         PlaneXOY = 1,

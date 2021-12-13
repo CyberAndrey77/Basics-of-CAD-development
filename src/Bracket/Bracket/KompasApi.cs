@@ -10,6 +10,9 @@ using KompasAPI7;
 
 namespace Bracket
 {
+    /// <summary>
+    /// Класс для связи с Компасом.
+    /// </summary>
     class KompasApi
     {
         /// <summary>

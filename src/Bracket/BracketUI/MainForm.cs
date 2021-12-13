@@ -9,6 +9,9 @@ using System.Drawing;
 
 namespace BracketUI
 {
+    /// <summary>
+    /// Форма для задания параметров модели.
+    /// </summary>
     public partial class MainForm : Form
     {
         /// <summary>

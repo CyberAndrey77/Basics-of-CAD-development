@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace BracketUI
 {
+    /// <summary>
+    /// Форма для отображения чертежа.
+    /// </summary>
     public partial class DrawingForm : Form
     {
         public DrawingForm()
