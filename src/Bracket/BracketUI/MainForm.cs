@@ -145,7 +145,12 @@ namespace BracketUI
             }
         }
 
-        private void textBox_Leave(object sender, EventArgs e)
+        /// <summary>
+        /// Обработка события покидания Textbox, заносит данные в параметры.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextBox_Leave(object sender, EventArgs e)
         {
             try
             {
@@ -161,12 +166,22 @@ namespace BracketUI
             }
         }
         
-        private void textBox_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Обработка события клика на Textbox, меняет картинку.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextBox_Click(object sender, EventArgs e)
         {
            pictureBox1.Image = (Image)Properties.Resources.ResourceManager.GetObject(_textBoxs[sender].ToString());
         }
 
-        private async void openDrawingButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Обработка открытия клика на кнопку для открытия другой формы.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void OpenDrawingButton_Click(object sender, EventArgs e)
         {
             openDrawingButton.Enabled = false;
             var drawingForm = new DrawingForm();
@@ -182,7 +197,12 @@ namespace BracketUI
             });
         }
 
-        private void buildButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Обработка события нажатия на кнопку построения детали.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BuildButton_Click(object sender, EventArgs e)
         {
             try
             {

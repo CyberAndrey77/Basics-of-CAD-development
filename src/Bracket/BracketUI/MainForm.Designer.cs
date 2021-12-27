@@ -60,8 +60,8 @@ namespace BracketUI
             this.plateWidthTextBox.Name = "plateWidthTextBox";
             this.plateWidthTextBox.Size = new System.Drawing.Size(100, 22);
             this.plateWidthTextBox.TabIndex = 0;
-            this.plateWidthTextBox.Click += new System.EventHandler(this.textBox_Click);
-            this.plateWidthTextBox.Leave += new System.EventHandler(this.textBox_Leave);
+            this.plateWidthTextBox.Click += new System.EventHandler(this.TextBox_Click);
+            this.plateWidthTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // plateWidthLabel
             // 
@@ -87,8 +87,8 @@ namespace BracketUI
             this.plateLengthTextBox.Name = "plateLengthTextBox";
             this.plateLengthTextBox.Size = new System.Drawing.Size(100, 22);
             this.plateLengthTextBox.TabIndex = 3;
-            this.plateLengthTextBox.Click += new System.EventHandler(this.textBox_Click);
-            this.plateLengthTextBox.Leave += new System.EventHandler(this.textBox_Leave);
+            this.plateLengthTextBox.Click += new System.EventHandler(this.TextBox_Click);
+            this.plateLengthTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // outerTubeDiameterTextBox
             // 
@@ -96,8 +96,8 @@ namespace BracketUI
             this.outerTubeDiameterTextBox.Name = "outerTubeDiameterTextBox";
             this.outerTubeDiameterTextBox.Size = new System.Drawing.Size(100, 22);
             this.outerTubeDiameterTextBox.TabIndex = 4;
-            this.outerTubeDiameterTextBox.Click += new System.EventHandler(this.textBox_Click);
-            this.outerTubeDiameterTextBox.Leave += new System.EventHandler(this.textBox_Leave);
+            this.outerTubeDiameterTextBox.Click += new System.EventHandler(this.TextBox_Click);
+            this.outerTubeDiameterTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // outerTubeDiameterLabel
             // 
@@ -123,8 +123,8 @@ namespace BracketUI
             this.mountingHoleDiameterTextBox.Name = "mountingHoleDiameterTextBox";
             this.mountingHoleDiameterTextBox.Size = new System.Drawing.Size(100, 22);
             this.mountingHoleDiameterTextBox.TabIndex = 7;
-            this.mountingHoleDiameterTextBox.Click += new System.EventHandler(this.textBox_Click);
-            this.mountingHoleDiameterTextBox.Leave += new System.EventHandler(this.textBox_Leave);
+            this.mountingHoleDiameterTextBox.Click += new System.EventHandler(this.TextBox_Click);
+            this.mountingHoleDiameterTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // holeHeightTextBox
             // 
@@ -132,8 +132,8 @@ namespace BracketUI
             this.holeHeightTextBox.Name = "holeHeightTextBox";
             this.holeHeightTextBox.Size = new System.Drawing.Size(100, 22);
             this.holeHeightTextBox.TabIndex = 9;
-            this.holeHeightTextBox.Click += new System.EventHandler(this.textBox_Click);
-            this.holeHeightTextBox.Leave += new System.EventHandler(this.textBox_Leave);
+            this.holeHeightTextBox.Click += new System.EventHandler(this.TextBox_Click);
+            this.holeHeightTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // holeHeightLabel
             // 
@@ -150,8 +150,8 @@ namespace BracketUI
             this.sideWallHeightTextBox.Name = "sideWallHeightTextBox";
             this.sideWallHeightTextBox.Size = new System.Drawing.Size(100, 22);
             this.sideWallHeightTextBox.TabIndex = 11;
-            this.sideWallHeightTextBox.Click += new System.EventHandler(this.textBox_Click);
-            this.sideWallHeightTextBox.Leave += new System.EventHandler(this.textBox_Leave);
+            this.sideWallHeightTextBox.Click += new System.EventHandler(this.TextBox_Click);
+            this.sideWallHeightTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // sideWallHeightLabel
             // 
@@ -173,7 +173,7 @@ namespace BracketUI
             this.buildButton.TabIndex = 12;
             this.buildButton.Text = "Build";
             this.buildButton.UseVisualStyleBackColor = true;
-            this.buildButton.Click += new System.EventHandler(this.buildButton_Click);
+            this.buildButton.Click += new System.EventHandler(this.BuildButton_Click);
             // 
             // pictureBox1
             // 
@@ -196,7 +196,7 @@ namespace BracketUI
             this.openDrawingButton.TabIndex = 14;
             this.openDrawingButton.Text = "Open drawing";
             this.openDrawingButton.UseVisualStyleBackColor = true;
-            this.openDrawingButton.Click += new System.EventHandler(this.openDrawingButton_Click);
+            this.openDrawingButton.Click += new System.EventHandler(this.OpenDrawingButton_Click);
             // 
             // minMaxPlateWidthLabel
             // 
