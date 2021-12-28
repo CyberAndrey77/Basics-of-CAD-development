@@ -121,6 +121,9 @@
   <data name="BracketDrawing" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\Деталь.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DistanceFromWall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\DistanceFromWall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="HoleHeight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\HoleHeight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -130,6 +133,9 @@
   <data name="OuterTubeDiameter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\OuterTubeDiameter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="PlaneThickness" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\PlaneThickness.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="PlateLength" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\PlateLength.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -138,5 +144,8 @@
   </data>
   <data name="SideWallHeight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\SideWallHeight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TubeHeight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\TubeHeight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

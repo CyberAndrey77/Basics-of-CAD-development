@@ -37,7 +37,10 @@ namespace BracketUI
                 { ParameterName.OuterTubeDiameter, minMaxOuterTubeDiameterLabel},
                 { ParameterName.MountingHoleRadius, minMaxMountingHoleDiameterLabel},
                 { ParameterName.HoleHeight, minMaxHoleHeightLabel},
-                { ParameterName.SideWallHeight, minMaxSideWallHeightLabel}
+                { ParameterName.SideWallHeight, minMaxSideWallHeightLabel},
+                { ParameterName.PlaneThickness, minMaxPlaneThicknessLabel },
+                { ParameterName.TubeHeight, minMaxTubeHieghtLabel },
+                { ParameterName.DistanceFromWall, minMaxDistanceFromWallLabel }
             };
 
             _textBoxs = new Dictionary<object, ParameterName>
@@ -47,7 +50,10 @@ namespace BracketUI
                 { outerTubeDiameterTextBox, ParameterName.OuterTubeDiameter },
                 { mountingHoleDiameterTextBox, ParameterName.MountingHoleRadius },
                 { holeHeightTextBox, ParameterName.HoleHeight },
-                { sideWallHeightTextBox, ParameterName.SideWallHeight }
+                { sideWallHeightTextBox, ParameterName.SideWallHeight },
+                { planeThicknessTextBox, ParameterName.PlaneThickness },
+                { tubeHeightTextBox, ParameterName.TubeHeight },
+                { distanceFromWallTextBox, ParameterName.DistanceFromWall }
             };
 
             _parameters = new BracketParameters();
@@ -89,7 +95,7 @@ namespace BracketUI
             {
                 { MessageLevel.Error, MessageBoxIcon.Error },
                 { MessageLevel.Warning, MessageBoxIcon.Warning },
-                {MessageLevel.Info, MessageBoxIcon.Information }
+                { MessageLevel.Info, MessageBoxIcon.Information }
             };
 
             MessageBox.Show(message + "!", level.ToString(), MessageBoxButtons.OK,
@@ -140,6 +146,11 @@ namespace BracketUI
                     {
                         ChangeLabel(ParameterName.SideWallHeight);
                         ChangeLabel(ParameterName.MountingHoleRadius);
+                    }
+                    break;
+                case ParameterName.PlaneThickness:
+                    {
+                        ChangeLabel(ParameterName.HoleHeight);
                     }
                     break;
             }

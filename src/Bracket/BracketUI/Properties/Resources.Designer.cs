@@ -73,6 +73,16 @@ namespace BracketUI.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DistanceFromWall {
+            get {
+                object obj = ResourceManager.GetObject("DistanceFromWall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap HoleHeight {
             get {
                 object obj = ResourceManager.GetObject("HoleHeight", resourceCulture);
@@ -103,6 +113,16 @@ namespace BracketUI.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap PlaneThickness {
+            get {
+                object obj = ResourceManager.GetObject("PlaneThickness", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PlateLength {
             get {
                 object obj = ResourceManager.GetObject("PlateLength", resourceCulture);
@@ -126,6 +146,16 @@ namespace BracketUI.Properties {
         internal static System.Drawing.Bitmap SideWallHeight {
             get {
                 object obj = ResourceManager.GetObject("SideWallHeight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TubeHeight {
+            get {
+                object obj = ResourceManager.GetObject("TubeHeight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

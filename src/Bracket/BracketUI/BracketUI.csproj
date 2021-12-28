@@ -141,5 +141,14 @@
   <ItemGroup>
     <None Include="img\Деталь.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="img\DistanceFromWall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\PlaneThickness.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\TubeHeight.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -78,13 +78,15 @@ namespace Bracket
 
             y2 = parameters[ParameterName.PlateWidth].Value / 2;
             y1 = y2 - parameters[ParameterName.PlaneThickness].Value;
+
             //строим вторую стенку
             _kompasApi.CreateRegtangle(x1, y1, x2, y2);
             _kompasApi.ExtrudeRegtangle(parameters[ParameterName.SideWallHeight].Value -
                 parameters[ParameterName.PlaneThickness].Value);
 
 
-            _kompasApi.CreateCircle(x2 - (parameters[ParameterName.MountingHoleRadius].Value + 5),
+            _kompasApi.CreateCircle(x2 - (parameters[ParameterName.MountingHoleRadius].Value + 
+                parameters[ParameterName.DistanceFromWall].Value),
                 -parameters[ParameterName.HoleHeight].Value + parameters[ParameterName.PlaneThickness].Value,
                 parameters[ParameterName.MountingHoleRadius].Value, Plane.PlaneXOZ);
             _kompasApi.CutExtrudeCircle();

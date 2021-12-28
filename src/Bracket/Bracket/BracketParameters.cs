@@ -82,6 +82,12 @@ namespace Bracket
                         SetMinHoleHeight();
                     }
                     break;
+
+                case ParameterName.PlaneThickness:
+                    {
+                        SetMinHoleHeight();
+                    }
+                    break;
             }
         }
 
@@ -193,11 +199,11 @@ namespace Bracket
                 },
                 {
                     ParameterName.PlaneThickness, 
-                    new Parameter(3, 3, 3, ParameterName.PlaneThickness)
+                    new Parameter(3, 3, 5, ParameterName.PlaneThickness)
                 },
                 {
                     ParameterName.TubeHeight, 
-                    new Parameter(81, 81, 81, ParameterName.TubeHeight) 
+                    new Parameter(81, 70, 90, ParameterName.TubeHeight) 
                 },
                 {
                     ParameterName.TubeWallThickness, 
@@ -205,7 +211,7 @@ namespace Bracket
                 },
                 {
                     ParameterName.DistanceFromWall, 
-                    new Parameter(5, 5, 5, ParameterName.DistanceFromWall) 
+                    new Parameter(5, 5, 10, ParameterName.DistanceFromWall) 
                 }
             };
         }

@@ -47,7 +47,7 @@ namespace Bracket.UnitTests
             },
             { 
                 ParameterName.PlaneThickness, 
-                new Parameter(3, 3, 3, ParameterName.PlaneThickness) 
+                new Parameter(3, 3, 5, ParameterName.PlaneThickness) 
             },
             { 
                 ParameterName.DistanceFromWall, 
@@ -350,6 +350,23 @@ namespace Bracket.UnitTests
 
             //Assert
             Assert.AreEqual(expectedMaxMountingHoleRadius, actualMaxMountingHoleRadius);
+        }
+
+        [TestCase(3, 8, TestName = "Изменение минимума HoleHeight, путём изменения PlaneThickness")]
+        [TestCase(5, 10, TestName = "Изменение минимума HoleHeight, путём изменения PlaneThickness")]
+        public void ChangeMinHoleHeight_SetPlaneThickness_ResultCorrect(double planeThickness, double expectedHoleHeight)
+        {
+            //Arrange
+            var exectedPlaneThickness = planeThickness;
+            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
+            var bracketParameters = new BracketParameters(parameters);
+
+            //Act
+            bracketParameters.SetParameter(ParameterName.PlaneThickness, exectedPlaneThickness);
+            var actualHoleHeight = bracketParameters[ParameterName.HoleHeight].Min;
+
+            //Assert
+            Assert.AreEqual(expectedHoleHeight, actualHoleHeight);
         }
     }
 }
