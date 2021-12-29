@@ -40,10 +40,6 @@ namespace Bracket
                 {
                     throw new ArgumentException($"Max value cannot be less than the Min");
                 }
-                if (value < 0)
-                {
-                    throw new ArgumentException($"Value must be greater than zero");
-                }
                 _max = value;
             }
         }
