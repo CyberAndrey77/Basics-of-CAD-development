@@ -11,8 +11,7 @@ namespace Bracket.UnitTests
     [TestFixture]
     public class BracketParametersTest
     {
-        //TODO
-        private readonly Dictionary<ParameterName, Parameter> _threeParameters = 
+        private Dictionary<ParameterName, Parameter> _threeParameters => 
             new Dictionary<ParameterName, Parameter>
         {
             {
@@ -28,9 +27,8 @@ namespace Bracket.UnitTests
                 new Parameter(3, 3, 3, ParameterName.PlaneThickness) 
             }
         };
-
-        //TODO
-        private readonly Dictionary<ParameterName, Parameter> _fiveParameters = 
+        
+        private Dictionary<ParameterName, Parameter> _fiveParameters => 
             new Dictionary<ParameterName, Parameter>
         {
             {
@@ -57,15 +55,15 @@ namespace Bracket.UnitTests
 
         private Dictionary<ParameterName, Parameter> CreateNewDictionry(Dictionary<ParameterName, Parameter> oldDictionary)
         {
-            var newDictionary = new Dictionary<ParameterName, Parameter>();
-            foreach (var item in oldDictionary)
-            {
-                ParameterName key = item.Key;
-                var value = (Parameter)item.Value.Clone();
-                newDictionary.Add(key, value);
-            }
+            //var newDictionary = new Dictionary<ParameterName, Parameter>();
+            //foreach (var item in oldDictionary)
+            //{
+            //    ParameterName key = item.Key;
+            //    var value = (Parameter)item.Value.Clone();
+            //    newDictionary.Add(key, value);
+            //}
 
-            return newDictionary;
+            return oldDictionary;
         }
 
         [TestCase(TestName = "Тестирование конструктора")]

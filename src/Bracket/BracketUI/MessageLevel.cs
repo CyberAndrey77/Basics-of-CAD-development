@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace BracketUI
 {
-     //TODO: XML
      /// <summary>
      /// Перечисление уровней сообщений.
      /// </summary>

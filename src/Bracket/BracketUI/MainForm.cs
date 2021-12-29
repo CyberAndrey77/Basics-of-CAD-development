@@ -22,6 +22,7 @@ namespace BracketUI
         /// </summary>
         private readonly BracketParameters _parameters;
 
+        //TODO:
         /// <summary>
         /// Словарь с TextBoxs.
         /// </summary>
@@ -194,6 +195,7 @@ namespace BracketUI
         /// <param name="e"></param>
         private void TextBox_Click(object sender, EventArgs e)
         {
+            //TODO: RSDN
            pictureBox1.Image = (Image)Properties.Resources.ResourceManager.GetObject(_textBoxs[sender].ToString());
         }
 

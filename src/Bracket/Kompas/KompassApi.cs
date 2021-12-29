@@ -8,8 +8,10 @@ using Kompas6API5;
 using Kompas6Constants3D;
 using KompasAPI7;
 
+//TODO:
 namespace Bracket
 {
+    //TODO: RSDN
     /// <summary>
     /// Класс для связи с Компасом.
     /// </summary>
@@ -112,7 +114,7 @@ namespace Bracket
             _document3D = (ksDocument3D)Kompas.Document3D();
             _document3D.Create(false, true);
             _document2D = (ksDocument2D)Kompas.Document2D();
-            _part = (ksPart)_document3D.GetPart((int)Part_Type.pTop_Part); // новый компонент
+            _part = (ksPart)_document3D.GetPart((int)Part_Type.pTop_Part);
         }
 
         /// <summary>
