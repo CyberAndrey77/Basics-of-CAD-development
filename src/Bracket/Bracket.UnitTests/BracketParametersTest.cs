@@ -68,6 +68,68 @@ namespace Bracket.UnitTests
             return newDictionary;
         }
 
+        [TestCase(TestName = "Тестирование конструктора")]
+        public void TestConstructor()
+        {
+            //Arrange
+            var expectedParameters = new Dictionary<ParameterName, Parameter>()
+            {
+                {
+                    ParameterName.PlateWidth,
+                    new Parameter(80, 70, 100, ParameterName.PlateWidth)
+                },
+                {
+                    ParameterName.PlateLength,
+                    new Parameter(120, 100, 130, ParameterName.PlateLength)
+                },
+                {
+                    ParameterName.OuterTubeDiameter,
+                    new Parameter(60, 50, 70, ParameterName.OuterTubeDiameter)
+                },
+                {
+                    ParameterName.MountingHoleRadius,
+                    new Parameter(5, 2.5, 6, ParameterName.MountingHoleRadius)
+                },
+                {
+                    ParameterName.HoleHeight,
+                    new Parameter(10, 8, 15, ParameterName.HoleHeight)
+                },
+                {
+                    ParameterName.SideWallHeight,
+                    new Parameter(25, 20, 30, ParameterName.SideWallHeight)
+                },
+                {
+                    ParameterName.PlaneThickness,
+                    new Parameter(3, 3, 5, ParameterName.PlaneThickness)
+                },
+                {
+                    ParameterName.TubeHeight,
+                    new Parameter(81, 70, 90, ParameterName.TubeHeight)
+                },
+                {
+                    ParameterName.TubeWallThickness,
+                    new Parameter(5, 5, 5, ParameterName.TubeWallThickness)
+                },
+                {
+                    ParameterName.DistanceFromWall,
+                    new Parameter(5, 5, 10, ParameterName.DistanceFromWall)
+                }
+            };
+            //Act
+            var actualParameters = new BracketParameters();
+
+            //Assert
+            Assert.Multiple(() =>
+            {
+                foreach (var item in expectedParameters)
+                {
+                    Assert.AreEqual(item.Value.Value, actualParameters[item.Key].Value);
+                    Assert.AreEqual(item.Value.Max, actualParameters[item.Key].Max);
+                    Assert.AreEqual(item.Value.Min, actualParameters[item.Key].Min);
+                }
+            });
+        }
+
         [TestCase(TestName = "Получение параметра")]
         public void GetParameter_ResultCorrect()
         {
