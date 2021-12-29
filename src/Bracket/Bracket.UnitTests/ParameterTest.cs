@@ -43,9 +43,9 @@ namespace Bracket.UnitTests
             Assert.AreEqual(expectedMin, parameter.Min);
         }
 
-        [TestCase(-1.0, TestName = "Проверка геттера и сеттера у свойства Min на отрицательные значения")]
-        [TestCase(-1.0, TestName = "Проверка геттера и сеттера у свойства Max на отрицательные значения")]
-        public void Set_LessZero_ArgumentException(double value)
+        [TestCase(-1.0, true, TestName = "Проверка геттера и сеттера у свойства Min на отрицательные значения")]
+        [TestCase(-1.0, false, TestName = "Проверка геттера и сеттера у свойства Max на отрицательные значения")]
+        public void Set_LessZero_ArgumentException(double value, bool isMin)
         {
             //Arrange
             var expected = value;
@@ -55,7 +55,14 @@ namespace Bracket.UnitTests
             Assert.Throws<ArgumentException>(() =>
             {
                 //Act
-                parameter.Max = expected;
+                if (isMin)
+                {
+                    parameter.Min = expected;
+                }
+                else
+                {
+                    parameter.Max = expected;
+                }
             });
         }
 

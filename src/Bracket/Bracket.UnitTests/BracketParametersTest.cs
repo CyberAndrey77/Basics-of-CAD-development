@@ -55,9 +55,18 @@ namespace Bracket.UnitTests
             }
         };
 
+        private Dictionary<ParameterName, Parameter> CreateNewDictionry(Dictionary<ParameterName, Parameter> oldDictionary)
+        {
+            var newDictionary = new Dictionary<ParameterName, Parameter>();
+            foreach (var item in oldDictionary)
+            {
+                newDictionary.Add(item.Key, item.Value);
+            }
 
+            return newDictionary;
+        }
 
-[TestCase(TestName = "Получение параметра")]
+        [TestCase(TestName = "Получение параметра")]
         public void GetParameter_ResultCorrect()
         {
             //Arrange
@@ -119,7 +128,8 @@ namespace Bracket.UnitTests
             //Arrange
             var expectedMinPlateWidth = 76;
             Dictionary<ParameterName, Parameter> parameters = _threeParameters;
-            var bracketParameters = new BracketParameters(parameters);
+            //var bracketParameters = new BracketParameters(parameters);
+            var bracketParameters = new BracketParameters(CreateNewDictionry(_threeParameters));
 
             //Act
             //вводим максимальное значение для диаметра трубки
@@ -135,7 +145,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxOuterTubeDiameter = 64;
-            var bracketParameters = new BracketParameters(_threeParameters);
+            var bracketParameters = new BracketParameters(CreateNewDictionry(_threeParameters));
 
             //Act
             //вводим минимальное значение для ширины пластины
@@ -153,7 +163,7 @@ namespace Bracket.UnitTests
             var expectedMinSideWallHeight = 25;
 
             //TODO: Дубли убрать.
-            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
+            Dictionary<ParameterName, Parameter> parameters = CreateNewDictionry(_fiveParameters); ;
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -170,7 +180,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMinSideWallHeight = 21;
-            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
+            Dictionary<ParameterName, Parameter> parameters = CreateNewDictionry(_fiveParameters); ;
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -188,7 +198,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMinSideWallHeight = 26;
-            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
+            Dictionary<ParameterName, Parameter> parameters = CreateNewDictionry(_fiveParameters);
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -207,7 +217,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxHoleHeight = 10;
-            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
+            Dictionary<ParameterName, Parameter> parameters = CreateNewDictionry(_fiveParameters);
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -228,7 +238,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedHoleHeight = holeHeight;
-            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
+            Dictionary<ParameterName, Parameter> parameters = CreateNewDictionry(_fiveParameters);
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -246,7 +256,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxHoleHeight = 14;
-            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
+            Dictionary<ParameterName, Parameter> parameters = CreateNewDictionry(_fiveParameters);
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -267,7 +277,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedHoleHeight = holeHeight;
-            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
+            Dictionary<ParameterName, Parameter> parameters = CreateNewDictionry(_fiveParameters);
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -285,7 +295,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxMountingHoleRadius = 6;
-            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
+            Dictionary<ParameterName, Parameter> parameters = CreateNewDictionry(_fiveParameters);
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -303,7 +313,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxMountingHoleRadius = 4;
-            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
+            Dictionary<ParameterName, Parameter> parameters = CreateNewDictionry(_fiveParameters);
 
             //в этом месте нужно задать мин. радиус
             parameters[ParameterName.MountingHoleRadius].Value = 2.5;
@@ -324,7 +334,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxMountingHoleRadius = 5;
-            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
+            Dictionary<ParameterName, Parameter> parameters = CreateNewDictionry(_fiveParameters);
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -341,7 +351,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var expectedMaxMountingHoleRadius = 5;
-            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
+            Dictionary<ParameterName, Parameter> parameters = CreateNewDictionry(_fiveParameters);
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
@@ -358,7 +368,7 @@ namespace Bracket.UnitTests
         {
             //Arrange
             var exectedPlaneThickness = planeThickness;
-            Dictionary<ParameterName, Parameter> parameters = _fiveParameters;
+            Dictionary<ParameterName, Parameter> parameters = CreateNewDictionry(_fiveParameters);
             var bracketParameters = new BracketParameters(parameters);
 
             //Act
