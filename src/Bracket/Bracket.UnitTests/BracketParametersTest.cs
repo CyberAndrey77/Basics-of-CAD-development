@@ -60,7 +60,9 @@ namespace Bracket.UnitTests
             var newDictionary = new Dictionary<ParameterName, Parameter>();
             foreach (var item in oldDictionary)
             {
-                newDictionary.Add(item.Key, item.Value);
+                ParameterName key = item.Key;
+                var value = (Parameter)item.Value.Clone();
+                newDictionary.Add(key, value);
             }
 
             return newDictionary;
@@ -197,7 +199,7 @@ namespace Bracket.UnitTests
         public void ChangeSideWallHeight_SetValueHoleHeightAndMountingHoleRadius_ResultCorrect()
         {
             //Arrange
-            var expectedMinSideWallHeight = 26;
+            var expectedMinSideWallHeight = 25;
             Dictionary<ParameterName, Parameter> parameters = CreateNewDictionry(_fiveParameters);
             var bracketParameters = new BracketParameters(parameters);
 
@@ -205,7 +207,7 @@ namespace Bracket.UnitTests
             //вводим максимальное значение для радиуса отверстия
             bracketParameters.SetParameter(ParameterName.MountingHoleRadius, 6);
             //вводим максимальное значение для высоты отверстия
-            bracketParameters.SetParameter(ParameterName.HoleHeight, 15);
+            bracketParameters.SetParameter(ParameterName.HoleHeight, 14);
             var actualMinSideWallHeight = bracketParameters[ParameterName.SideWallHeight].Min;
 
             //Assert

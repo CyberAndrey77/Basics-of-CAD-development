@@ -5,7 +5,7 @@ namespace Bracket
     /// <summary>
     /// Класс параметр.
     /// </summary>
-    public class Parameter : IEquatable<Parameter>
+    public class Parameter : IEquatable<Parameter>, ICloneable
     {
         /// <summary>
         /// Поле текущего значения.
@@ -131,6 +131,11 @@ namespace Bracket
                 && _name == other._name
                 && _parameterName == other._parameterName
                 && _value == other._value;
+        }
+
+        public object Clone()
+        {
+            return new Parameter(Value, Min, Max, Name);
         }
     }
 }
