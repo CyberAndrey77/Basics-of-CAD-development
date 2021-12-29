@@ -6,6 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Drawing;
+using System.IO;
+using System.Diagnostics;
+using Microsoft.VisualBasic.Devices;
 
 namespace BracketUI
 {
@@ -24,8 +27,14 @@ namespace BracketUI
         /// </summary>
         private readonly Dictionary<object, ParameterName> _textBoxs;
 
+        /// <summary>
+        /// Словарь с Label.
+        /// </summary>
         private readonly Dictionary<ParameterName, Label> _labels;
 
+        /// <summary>
+        /// Конструктор формы.
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -70,6 +79,7 @@ namespace BracketUI
             }
 
             pictureBox1.Image = Properties.Resources.PlateWidth;
+            //StressTesting();
         }
 
         /// <summary>
@@ -237,6 +247,27 @@ namespace BracketUI
             catch (COMException exception)
             {
                 ShowMessage(exception.Message, MessageLevel.Error, sender);
+            }
+        }
+
+        private void StressTesting()
+        {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            var builder = new BracketBuilder();
+
+            int countModel = 0;
+            using (StreamWriter writer = new StreamWriter("A:\\TestSAPR\\log.txt", true))
+            {
+                while (true)
+                {
+                    builder.CreateModel(_parameters);
+                    var computerInfo = new ComputerInfo();
+                    var usedMemory = computerInfo.TotalPhysicalMemory - computerInfo.AvailablePhysicalMemory;
+                    countModel++;
+                    writer.WriteLineAsync($"{countModel}\t{stopWatch.ElapsedMilliseconds}\t{usedMemory}");
+                    writer.Flush();
+                }
             }
         }
     }
