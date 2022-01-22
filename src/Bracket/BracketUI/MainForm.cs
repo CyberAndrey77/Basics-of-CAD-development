@@ -9,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Diagnostics;
 using Microsoft.VisualBasic.Devices;
+using Kompass;
 
 namespace BracketUI
 {
@@ -26,7 +27,7 @@ namespace BracketUI
         /// <summary>
         /// Словарь с TextBoxs.
         /// </summary>
-        private readonly Dictionary<object, ParameterName> _textBoxs;
+        private readonly Dictionary<TextBox, ParameterName> _textBoxs;
 
         /// <summary>
         /// Словарь с Label.
@@ -53,7 +54,7 @@ namespace BracketUI
                 { ParameterName.DistanceFromWall, minMaxDistanceFromWallLabel }
             };
 
-            _textBoxs = new Dictionary<object, ParameterName>
+            _textBoxs = new Dictionary<TextBox, ParameterName>
             {
                 { plateLengthTextBox, ParameterName.PlateLength },
                 { plateWidthTextBox, ParameterName.PlateWidth },
@@ -122,13 +123,13 @@ namespace BracketUI
         /// Смена текущего значения у параметра.
         /// Также меняет максимальные и минимальные значения у зависимых параметров.
         /// </summary>
-        /// <param name="sender">Объект, который вызвал метод</param>
-        private void ChangeParameter(object sender)
+        /// <param name="textBox">Объект, который вызвал метод</param>
+        private void ChangeParameter(TextBox textBox)
         {
-            ((TextBox)sender).Text = ((TextBox)sender).Text.Replace('.', ',');
-            _parameters.SetParameter(_textBoxs[sender], double.Parse(((TextBox)sender).Text));
+            textBox.Text = textBox.Text.Replace('.', ',');
+            _parameters.SetParameter(_textBoxs[textBox], double.Parse(textBox.Text));
 
-            switch (_textBoxs[sender])
+            switch (_textBoxs[textBox])
             {
                 case ParameterName.PlateWidth:
                     {
@@ -176,7 +177,8 @@ namespace BracketUI
         {
             try
             {
-                ChangeParameter(sender);
+                var textBox = (TextBox)sender;
+                ChangeParameter(textBox);
             }
             catch (FormatException)
             {
@@ -196,7 +198,7 @@ namespace BracketUI
         private void TextBox_Click(object sender, EventArgs e)
         {
             //TODO: RSDN
-           pictureBox1.Image = (Image)Properties.Resources.ResourceManager.GetObject(_textBoxs[sender].ToString());
+           pictureBox1.Image = (Image)Properties.Resources.ResourceManager.GetObject(_textBoxs[(TextBox)sender].ToString());
         }
 
         /// <summary>

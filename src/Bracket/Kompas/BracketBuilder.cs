@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using Bracket;
 
-//TODO:
-namespace Bracket
+namespace Kompass
 {
     /// <summary>
     /// Класс для постройки модели.

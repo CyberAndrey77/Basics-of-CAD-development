@@ -9,7 +9,7 @@ using Kompas6Constants3D;
 using KompasAPI7;
 
 //TODO:
-namespace Bracket
+namespace Kompass
 {
     //TODO: RSDN
     /// <summary>

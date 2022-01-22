@@ -1,4 +1,4 @@
-﻿namespace Bracket
+﻿namespace Kompass
 {
     /// <summary>
     /// Перечисление осей в Компасе.
