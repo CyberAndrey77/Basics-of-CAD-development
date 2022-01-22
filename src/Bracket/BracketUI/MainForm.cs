@@ -198,7 +198,8 @@ namespace BracketUI
         private void TextBox_Click(object sender, EventArgs e)
         {
             //TODO: RSDN
-           pictureBox1.Image = (Image)Properties.Resources.ResourceManager.GetObject(_textBoxs[(TextBox)sender].ToString());
+           pictureBox1.Image = (Image)Properties.Resources.
+                ResourceManager.GetObject(_textBoxs[(TextBox)sender].ToString());
         }
 
         /// <summary>
@@ -267,7 +268,8 @@ namespace BracketUI
                 {
                     builder.CreateModel(_parameters);
                     var computerInfo = new ComputerInfo();
-                    var usedMemory = computerInfo.TotalPhysicalMemory - computerInfo.AvailablePhysicalMemory;
+                    var usedMemory = computerInfo.TotalPhysicalMemory - 
+                        computerInfo.AvailablePhysicalMemory;
                     countModel++;
                     writer.WriteLineAsync($"{countModel}\t{stopWatch.ElapsedMilliseconds}\t{usedMemory}");
                     writer.Flush();
