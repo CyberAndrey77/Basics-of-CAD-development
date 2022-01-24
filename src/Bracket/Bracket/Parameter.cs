@@ -69,8 +69,8 @@ namespace Bracket
             {
                 if (value < Min || value > Max)
                 {
-                    //TODO: RSDN
-                    throw new ArgumentException($"{_parameterName} must be greater than {Min} " +
+                    throw new ArgumentException(
+                        $"{_parameterName} must be greater than {Min} " +
                         $"mm and not greater than " +
                         $"{Max} mm, it was {value} mm");
                 }
@@ -86,7 +86,6 @@ namespace Bracket
             set
             {
                 _name = value;
-                //TODO: RSDN
                 _parameterName = System.Text.RegularExpressions.Regex.
                     Replace(value.ToString(), "([a-z])([A-Z])", "$1 $2");
             }
