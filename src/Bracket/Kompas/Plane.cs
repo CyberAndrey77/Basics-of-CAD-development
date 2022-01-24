@@ -1,4 +1,4 @@
-﻿namespace Kompass
+﻿namespace Kompas
 {
     /// <summary>
     /// Перечисление осей в Компасе.

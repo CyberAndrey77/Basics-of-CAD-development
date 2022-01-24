@@ -9,13 +9,13 @@ using Kompas6Constants3D;
 using KompasAPI7;
 
 //TODO:
-namespace Kompass
+namespace Kompas
 {
     //TODO: RSDN
     /// <summary>
     /// Класс для связи с Компасом.
     /// </summary>
-    class KompasApi
+    public class KompasApi
     {
         /// <summary>
         /// Поле 3D документа.

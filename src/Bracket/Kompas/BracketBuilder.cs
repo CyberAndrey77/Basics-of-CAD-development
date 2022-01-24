@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Bracket;
 
-namespace Kompass
+namespace Kompas
 {
     /// <summary>
     /// Класс для постройки модели.

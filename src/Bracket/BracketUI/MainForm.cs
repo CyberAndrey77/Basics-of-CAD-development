@@ -9,7 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Diagnostics;
 using Microsoft.VisualBasic.Devices;
-using Kompass;
+using Kompas;
 
 namespace BracketUI
 {
