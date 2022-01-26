@@ -28,7 +28,7 @@ namespace Kompas
         private ksDocument2D _document2D;
 
         /// <summary>
-        /// 
+        /// Интерфейс детали.
         /// </summary>
         private ksPart _part;
 
@@ -38,7 +38,7 @@ namespace Kompas
         private ksEntity _sketch;
 
         /// <summary>
-        /// 
+        /// Интерфейс свойств эскиза.
         /// </summary>
         private ksSketchDefinition _sketchDefinition;
 
@@ -48,7 +48,7 @@ namespace Kompas
         private ksEntity _currentPlan;
 
         /// <summary>
-        /// 
+        /// Главный интерфейс.
         /// </summary>
         public KompasObject Kompas { get; }
 
