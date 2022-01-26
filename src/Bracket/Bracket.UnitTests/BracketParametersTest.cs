@@ -171,7 +171,7 @@ namespace Bracket.UnitTests
             Assert.AreEqual(expectedValue, actualValue);
         }
 
-        [TestCase(TestName = "Изменение минимума параметра PlateWidth изменением PlateWidth")]
+        [TestCase(TestName = "Изменение минимума параметра PlateWidth изменением OuterTubeDiameter")]
         public void ChangePlateWidthParameter_SetValueOuterTubeDiameter_ResultCorrect()
         {
             //Arrange
@@ -243,7 +243,7 @@ namespace Bracket.UnitTests
         [TestCase(5, ParameterName.SideWallHeight, 20, ParameterName.MountingHoleRadius,
             TestName = "Изменение максимума параметра MountingHoleRadius путем " +
             "изменения SideWallHeight на минимальное значение")]
-        public void ChangeHoleHeight_SetValueSideWallHeight_ResultCorrect(
+        public void ChangeDependentParameterMaximum_SetValue_ResultCorrect(
             double expected, ParameterName parameter, double value, ParameterName changeableParametr)
         {
             //Arrange
@@ -256,23 +256,6 @@ namespace Bracket.UnitTests
 
             //Assert
             Assert.AreEqual(expectedMaxHoleHeight, actualMaxHoleHeight);
-        }
-
-        [TestCase(TestName = "Изменение максимума параметра MountingHoleRadius путем " +
-            "изменения HoleHeight на максимальное значение и изменение SideWallHeight на максимальное значение")]
-        public void ChangeMaxMountingHoleRadius_SetMaxHoleHeightAndMaxSideWallHeight_ResultCorrect()
-        {
-            //Arrange
-            var expectedMaxMountingHoleRadius = 6;
-            var bracketParameters = new BracketParameters(_fiveParameters);
-
-            //Act
-            bracketParameters.SetParameter(ParameterName.HoleHeight, 15);
-            bracketParameters.SetParameter(ParameterName.SideWallHeight, 30);
-            var actualMaxMountingHoleRadius = bracketParameters[ParameterName.MountingHoleRadius].Max;
-
-            //Assert
-            Assert.AreEqual(expectedMaxMountingHoleRadius, actualMaxMountingHoleRadius);
         }
 
         [TestCase(TestName = "Изменение максимума параметра MountingHoleRadius путем " +
@@ -295,42 +278,56 @@ namespace Bracket.UnitTests
             Assert.AreEqual(expectedMaxMountingHoleRadius, actualMaxMountingHoleRadius);
         }
 
-
-        [TestCase(12.5, 2.5, 20, TestName = "Изменение максимума параметра HoleHeight путем " +
-            "изменения MountingHoleRadius на минимальное значение и изменение SideWallHeight на минимальное значение")]
-        [TestCase(10, 6, 21, TestName = "Изменение максимума параметра HoleHeight путем " +
-            "изменения MountingHoleRadius на максимальное значение и изменение SideWallHeight на минимально значение")]
-        public void ChangeHoleHeight_SetMountingHoleRadiusAndSideWallHeight_ResultCorrect(double holeHeight,
-            double mountingHoleRadius, double sideWallHeight)
+        [TestCase(6, ParameterName.HoleHeight, 15, 
+            ParameterName.SideWallHeight, 30, ParameterName.MountingHoleRadius, 
+            TestName = "Изменение максимума параметра MountingHoleRadius путем " +
+            "изменения HoleHeight на максимальное значение " +
+            "и изменение SideWallHeight на максимальное значение")]
+        [TestCase(12.5, ParameterName.MountingHoleRadius, 2.5, 
+            ParameterName.SideWallHeight, 20, ParameterName.HoleHeight, 
+            TestName = "Изменение максимума параметра HoleHeight путем " +
+            "изменения MountingHoleRadius на минимальное значение и " +
+            "изменение SideWallHeight на минимальное значение")]
+        [TestCase(10, ParameterName.MountingHoleRadius, 6, 
+            ParameterName.SideWallHeight, 21, ParameterName.HoleHeight, 
+            TestName = "Изменение максимума параметра HoleHeight путем " +
+            "изменения MountingHoleRadius на максимальное значение " +
+            "и изменение SideWallHeight на минимально значение")]
+        public void ChangeDependentParameterMaximum_SetTwoValues_ResultCorrect(
+            double expected, ParameterName parameter1, double value1, 
+            ParameterName parameter2, double value2, ParameterName changeableParametr)
         {
             //Arrange
-            var expectedHoleHeight = holeHeight;
+            var expectedHoleHeight = expected;
             var bracketParameters = new BracketParameters(_fiveParameters);
 
             //Act
-            bracketParameters.SetParameter(ParameterName.MountingHoleRadius, mountingHoleRadius);
-            bracketParameters.SetParameter(ParameterName.SideWallHeight, sideWallHeight);
-            var actualHoleHeight = bracketParameters[ParameterName.HoleHeight].Max;
+            bracketParameters.SetParameter(parameter1, value1);
+            bracketParameters.SetParameter(parameter2, value2);
+            var actualHoleHeight = bracketParameters[changeableParametr].Max;
 
             //Assert
             Assert.AreEqual(expectedHoleHeight, actualHoleHeight);
         }
 
-
-        [TestCase(TestName = "Изменение минимума зависимого параметра SideWallHeight путем " +
+        [TestCase(25, ParameterName.MountingHoleRadius, 6,
+            ParameterName.HoleHeight, 14, ParameterName.SideWallHeight,
+            TestName = "Изменение минимума зависимого параметра SideWallHeight путем " +
             "изменения MountingHoleRadius и HoleHeight")]
-        public void ChangeSideWallHeight_SetValueHoleHeightAndMountingHoleRadius_ResultCorrect()
+        public void ChangeDependentParameterMinimum_SetTwoValues_ResultCorrect(
+            double expected, ParameterName parameter1, double value1,
+            ParameterName parameter2, double value2, ParameterName changeableParametr)
         {
             //Arrange
-            var expectedMinSideWallHeight = 25;
+            var expectedMinSideWallHeight = expected;
             var bracketParameters = new BracketParameters(_fiveParameters);
 
             //Act
             //вводим максимальное значение для радиуса отверстия
-            bracketParameters.SetParameter(ParameterName.MountingHoleRadius, 6);
+            bracketParameters.SetParameter(parameter1, value1);
             //вводим максимальное значение для высоты отверстия
-            bracketParameters.SetParameter(ParameterName.HoleHeight, 14);
-            var actualMinSideWallHeight = bracketParameters[ParameterName.SideWallHeight].Min;
+            bracketParameters.SetParameter(parameter2, value2);
+            var actualMinSideWallHeight = bracketParameters[changeableParametr].Min;
 
             //Assert
             Assert.AreEqual(expectedMinSideWallHeight, actualMinSideWallHeight);
