@@ -8,10 +8,8 @@ using Kompas6API5;
 using Kompas6Constants3D;
 using KompasAPI7;
 
-//TODO:
 namespace Kompas
 {
-    //TODO: RSDN
     /// <summary>
     /// Класс для связи с Компасом.
     /// </summary>
